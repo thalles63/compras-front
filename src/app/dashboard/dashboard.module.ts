@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { DashboardActionPanelComponent } from './action-panel/action-panel.component';
 import { DashboardComponent } from './dashboard.component';
 import { DashboardRoutingModule } from './dashboard.routing';
+import { DashboardService } from './dashboard.service';
 import { DashboardHeaderComponent } from './header/header.component';
 
 @NgModule({
@@ -16,7 +17,9 @@ import { DashboardHeaderComponent } from './header/header.component';
 		CommonModule,
 	],
 	exports: [DashboardComponent],
-	providers: [],
+	providers: [
+		DashboardService
+	],
 	bootstrap: []
 })
 export class DashboardModule {
