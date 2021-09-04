@@ -1,0 +1,20 @@
+.header {
+    height: 200px;
+    background-color: #29539b;
+    background-image: linear-gradient(315deg, #29539b 0%, #1e3b70 74%);
+
+    &__nome-container {
+        padding: 20px;
+        padding-top: 45px;
+
+        &--nome {
+            color: #FFF;
+            font-size: 21px;
+            font-weight: 500;
+        }
+        &--data {
+            font-size: 13px;
+            color: #d8d8d8;
+        }
+    }
+}
