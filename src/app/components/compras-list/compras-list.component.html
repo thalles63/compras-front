@@ -1,10 +1,10 @@
 <div class="compras-list" *ngFor="let item of list">
     <div class="compras-list__logo">
-        <img src="/assets/img/lojas/{{item.nomeImg}}.png" alt="{{item.nomeImg}}">
+        <i class="las la-utensils" aria-hidden="true"></i>
     </div>
     <div class="compras-list__description">
         <div class="compras-list__description--title">{{item.titulo}}</div>
         <div class="compras-list__description--payer">{{item.quemPagou}} Pagou</div>
     </div>
-    <div class="compras-list__valor">R$ {{item.valor}}</div>
+    <div class="compras-list__valor">R$ {{item.valor | number: '1.2-2'}}</div>
 </div>

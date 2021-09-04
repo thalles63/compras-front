@@ -8,18 +8,20 @@
         font-weight: 700;
     }
     &__logo {
-        background-color: #FFF;
         border-radius: 5px;
-        width: 41px;
+        width: 43px;
+        overflow: hidden;
+        margin-right: 10px;
+        height: 43px;
         display: flex;
         align-items: center;
-        margin-right: 10px;
-        height: 43px;;
+        justify-content: center;
+        background-color: #fff5f8;
+        border: 1px solid #f0d1d9;
 
-        img {
-            max-height: 41px;
-            border-radius: 5px;
-            width: 41px;
+        i {
+            font-size: 30px;
+            color: #f1416c;
         }
     }
     &__description {

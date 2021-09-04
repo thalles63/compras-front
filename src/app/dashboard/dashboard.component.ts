@@ -11,13 +11,13 @@ export class DashboardComponent implements OnInit {
 	compras: any = [
 		{
 			titulo: 'Netflix',
-			nomeImg: 'netflix',
+			categoria: 'entretenimento',
 			valor: 47.00,
 			quemPagou: 'Thays'
 		},
 		{
 			titulo: 'Kenji Sushi',
-			nomeImg: 'kenji',
+			categoria: 'restaurante',
 			valor: 90.00,
 			quemPagou: 'Thalles'
 		}
