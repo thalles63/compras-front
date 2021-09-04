@@ -1,10 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+
+import { ComprasListModule } from '../components/compras-list/compras-list.module';
+
 import { DashboardActionPanelComponent } from './action-panel/action-panel.component';
+import { DashboardHeaderComponent } from './header/header.component';
 import { DashboardComponent } from './dashboard.component';
 import { DashboardRoutingModule } from './dashboard.routing';
 import { DashboardService } from './dashboard.service';
-import { DashboardHeaderComponent } from './header/header.component';
 
 @NgModule({
 	declarations: [
@@ -15,6 +18,7 @@ import { DashboardHeaderComponent } from './header/header.component';
 	imports: [
 		DashboardRoutingModule,
 		CommonModule,
+		ComprasListModule
 	],
 	exports: [DashboardComponent],
 	providers: [

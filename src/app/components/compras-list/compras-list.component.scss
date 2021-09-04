@@ -1,0 +1,34 @@
+.compras-list {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+
+    &__valor {
+        margin-left: auto;
+        font-weight: 700;
+    }
+    &__logo {
+        background-color: #FFF;
+        border-radius: 5px;
+        width: 41px;
+        display: flex;
+        align-items: center;
+        margin-right: 10px;
+        height: 43px;;
+
+        img {
+            max-height: 41px;
+            border-radius: 5px;
+            width: 41px;
+        }
+    }
+    &__description {
+        &--title {
+            font-weight: 700;
+        }
+        &--payer {
+            color: #afafaf;
+            font-size: 14px;
+        }
+    }
+}
