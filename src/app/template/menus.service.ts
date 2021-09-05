@@ -19,7 +19,7 @@ export class MenusService {
             {
                 titulo: 'Lista',
                 icone: 'la-list-alt',
-                link: 'lista'
+                link: 'lista-compras'
             },
             {
                 titulo: 'Config',
