@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { User } from './user';
 
 @Injectable()
 export class LoginService {
@@ -9,4 +10,11 @@ export class LoginService {
         return !!user.id;
     }
 
+    logout() {
+        localStorage.removeItem('user');
+    }
+
+    login(user: User) {
+        localStorage.setItem('user', JSON.stringify(user));
+    }
 }

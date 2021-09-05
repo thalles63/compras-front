@@ -24,7 +24,7 @@ export class MenusService {
             {
                 titulo: 'Config',
                 icone: 'la-cog',
-                link: 'config'
+                link: 'configs'
             },
         ]
 	}

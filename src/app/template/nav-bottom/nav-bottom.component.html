@@ -2,7 +2,7 @@
     <div class="nav__link"
          [ngClass]="{'nav__link--active' : getLinkTela(item.link) }"
          *ngFor="let item of listaMenus"
-         [routerLink]="'/' + item.link">
+         (click)="goTo(item)">
         <i class="nav__icon las {{item.icone}}"
            aria-hidden="true"></i>
         <span class="nav__text">{{item.titulo}}</span>

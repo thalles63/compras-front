@@ -22,4 +22,8 @@ export class NavBottomComponent implements OnInit {
     getLinkTela(link: string) {
         return ('/' + link === this.router.url);
     }
+
+    goTo(item: any) {
+        this.router.navigate([item.link], { replaceUrl: true });
+    }
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { LoginService } from './login.service';
 import { User } from './user';
 
 @Component({
@@ -8,7 +9,8 @@ import { User } from './user';
 })
 export class LoginComponent implements OnInit {
 	constructor(
-		private router: Router
+		private router: Router,
+        private loginService: LoginService
 	) {}
 
     users: User[] = [
@@ -29,7 +31,7 @@ export class LoginComponent implements OnInit {
     }
 
     doLogin(user: User) {
-        localStorage.setItem('user', JSON.stringify(user));
+        this.loginService.login(user);
         this.router.navigate(['dashboard'], { replaceUrl: true });
     }
 }
