@@ -5,15 +5,25 @@
         <i class="las la-search input__icon"
            aria-hidden="true"></i>
         <input type="text"
-               class="input__field" />
+               class="input__field"
+               [(ngModel)]="filtro"/>
     </div>
-
 
     <div class="lista">
         <div class="lista__item"
+             [class.last]="!!last && lista.length === 0"
+             *ngFor="let item of listaChecked | filter: filtro; let last = last; let index = index;"
+             (click)="uncheckItem(item)">
+            <div class="lista__item--checkbox">
+                <input type="checkbox"
+                       [(ngModel)]="item.checked">
+            </div>
+            <label class="lista__item--description">{{item.descricao}}</label>
+        </div>
+        <div class="lista__item"
              [class.last]="!!last"
-             *ngFor="let item of lista; let last = last;"
-             (click)="toggleItem(item)">
+             *ngFor="let item of lista | filter: filtro; let last = last"
+             (click)="checkItem(item)">
             <div class="lista__item--checkbox">
                 <input type="checkbox"
                        [(ngModel)]="item.checked">
