@@ -1,3 +1,24 @@
 <page-container>
-    lista-compras<br>lista-compras<br>lista-compras<br>lista-compras<br>lista-compras<br>lista-compras<br>lista-compras<br>lista-compras<br>lista-compras<br>lista-compras<br>lista-compras<br>lista-compras<br>lista-compras<br>lista-compras<br>lista-compras<br>lista-compras<br>lista-compras<br>lista-compras<br>lista-compras<br>lista-compras<br>lista-compras<br>lista-compras<br>lista-compras<br>lista-compras<br>lista-compras<br>lista-compras<br>lista-compras<br>lista-compras<br>lista-compras<br>lista-compras<br>lista-compras<br>lista-compras<br>lista-compras<br>lista-compras<br>lista-compras<br>lista-compras<br>lista-compras<br>lista-compras<br>lista-compras<br>lista-compras<br>lista-compras<br>lista-compras<br>lista-compras<br>lista-compras<br>lista-compras<br>lista-compras<br>lista-compras<br>
+    <div class="title">Lista de Compras</div>
+
+    <div class="input">
+        <i class="las la-search input__icon"
+           aria-hidden="true"></i>
+        <input type="text"
+               class="input__field" />
+    </div>
+
+
+    <div class="lista">
+        <div class="lista__item"
+             [class.last]="!!last"
+             *ngFor="let item of lista; let last = last;"
+             (click)="toggleItem(item)">
+            <div class="lista__item--checkbox">
+                <input type="checkbox"
+                       [(ngModel)]="item.checked">
+            </div>
+            <label class="lista__item--description">{{item.descricao}}</label>
+        </div>
+    </div>
 </page-container>
