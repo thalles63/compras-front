@@ -5,7 +5,8 @@ export class LoginService {
 	constructor() {}
 
     isLogged() {
-        return false;
+        let user = JSON.parse(localStorage.getItem('user') || '{}');
+        return !!user.id;
     }
 
 }

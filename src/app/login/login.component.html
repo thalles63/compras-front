@@ -10,14 +10,11 @@
         <div class="login-body__welcome--subtitle">Escolha o seu usuário para continuar</div>
     </div>
     <div class="login-body__users">
-        <div *ngFor="let user of users" class="login-body__users--item">
+        <div *ngFor="let user of users" class="login-body__users--item" (click)="doLogin(user)">
             <div class="login-body__users--image">
                 <img [src]="'/assets/img/users/' + user.imgNome + '.jpg'" alt="">
             </div>
             <div class="login-body__users--name">{{user.nome}}</div>
         </div>
     </div>
-    <!-- <div>
-        Entrar
-    </div> -->
 </div>

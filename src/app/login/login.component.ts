@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { User } from './user';
 
 @Component({
 	templateUrl: './login.component.html',
@@ -6,14 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 	constructor(
+		private router: Router
 	) {}
 
-    users: any = [
+    users: User[] = [
         {
+            id: 1,
             nome: "Thalles Leonardelli",
             imgNome: "thalles"
         },
         {
+            id: 2,
             nome: "Thays Maineri",
             imgNome: "Thays"
         }
@@ -21,5 +26,10 @@ export class LoginComponent implements OnInit {
 
 	ngOnInit(): void {
     // jhgjhgjg
-  }
+    }
+
+    doLogin(user: User) {
+        localStorage.setItem('user', JSON.stringify(user));
+        this.router.navigate(['dashboard'], { replaceUrl: true });
+    }
 }
