@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
         },
         {
             nome: "Thays Maineri",
-            imgNome: "thays"
+            imgNome: "Thays"
         }
     ]
 
