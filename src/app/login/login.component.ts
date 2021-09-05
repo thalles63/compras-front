@@ -11,11 +11,11 @@ export class LoginComponent implements OnInit {
     users: any = [
         {
             nome: "Thalles Leonardelli",
-            imgNome: "Thalles"
+            imgNome: "thalles"
         },
         {
             nome: "Thays Maineri",
-            imgNome: "Thays"
+            imgNome: "thays"
         }
     ]
 
