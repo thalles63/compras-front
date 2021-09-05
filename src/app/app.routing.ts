@@ -1,11 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './login/auth.guard';
+import { LoginComponent } from './login/login.component';
 import { TemplateComponent } from './template/template.component';
 
 const routes: Routes = [
 	{
 		path: '',
 		component: TemplateComponent,
+		canActivateChild: [ AuthGuard ],
 		children: [
 			{ path: '', redirectTo: 'dashboard', pathMatch: 'full' },
 			{
@@ -17,6 +20,10 @@ const routes: Routes = [
 				loadChildren: () => import('./compras/compras.module').then(m => m.ComprasModule)
 			}
 		]
+	},
+	{
+		path: 'login',
+		component: LoginComponent
 	},
     
 	// { path: 'error/not-found', component: CittaErrorPageComponent },

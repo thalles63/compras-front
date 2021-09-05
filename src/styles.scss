@@ -5,9 +5,10 @@ html, body {
     font-family: 'Poppins';
     background-color: #F6F7FB;
     color: #616161;
+    height: 100%;
 }
-@media (max-width: 700px) {
-	body {
-        margin: 0 0 55px 0;
-	}
+.root-div {
+    display: flex; 
+    flex-direction: column;
+    height: 100%;
 }

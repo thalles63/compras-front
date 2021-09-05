@@ -1,0 +1,23 @@
+<div class="header">
+
+</div>
+<div class="login-body">
+    <div class="login-body__logo">
+        <img src="/assets/img/logo.png" alt="logomarca">
+    </div>
+    <div class="login-body__welcome">
+        <div class="login-body__welcome--title">Seja bem vindo(a)</div>
+        <div class="login-body__welcome--subtitle">Escolha o seu usuário para continuar</div>
+    </div>
+    <div class="login-body__users">
+        <div *ngFor="let user of users" class="login-body__users--item">
+            <div class="login-body__users--image">
+                <img src="/assets/img/users/{{user.imgNome}}.jpg" alt="">
+            </div>
+            <div class="login-body__users--name">{{user.nome}}</div>
+        </div>
+    </div>
+    <!-- <div>
+        Entrar
+    </div> -->
+</div>
