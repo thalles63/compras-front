@@ -1,3 +1,6 @@
+.lista-compras {
+    padding: 0 30px;
+}
 .input {
     position: relative;
     margin-bottom: 20px;
@@ -5,8 +8,8 @@
     &__field {
         width: calc(100% - 39px);
         height: 35px;
-        border: 1px solid #D4d4d4;
-        background-color: #FFF;
+        border: 1px solid #efecec;
+        background-color: #efecec;
         border-radius: 14px;
         font-size: 15px;
         padding-left: 39px;
@@ -25,6 +28,7 @@
     font-weight: bold;
     font-size: 19px;
     margin-bottom: 10px;
+    padding-top: 40px;
 }
 .lista {
     &__item {
