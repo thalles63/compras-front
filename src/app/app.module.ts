@@ -8,6 +8,8 @@ import { LoginModule } from './login/login.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthGuard } from './login/auth.guard';
 import { LoginService } from './login/login.service';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
     declarations: [
@@ -17,7 +19,13 @@ import { LoginService } from './login/login.service';
         BrowserModule,
         AppRoutingModule,
         TemplateModule,
-        BrowserAnimationsModule
+        BrowserAnimationsModule,
+        ServiceWorkerModule.register('ngsw-worker.js', {
+          enabled: environment.production,
+          // Register the ServiceWorker as soon as the app is stable
+          // or after 30 seconds (whichever comes first).
+          registrationStrategy: 'registerWhenStable:30000'
+        })
     ],
     providers: [ AuthGuard, LoginService ],
     bootstrap: [AppComponent]
