@@ -2,6 +2,7 @@
     height: 100%;
 }
 .login-body {
+    padding: 0 40px;
     &__logo {
         margin-top: 50px;
         text-align: center;
@@ -17,8 +18,9 @@
             margin-bottom: 5px;
         }
         &--subtitle {
-            color: #d3d3d3;
             font-size: 13px;
+            color: #b5b5c3;
+            font-weight: 500;
         }
     }
 
@@ -31,6 +33,7 @@
             align-items: center;
             margin-bottom: 10px;
             background-color: #FFF;
+            box-shadow: 0 .1rem 1rem .25rem rgba(0,0,0,.05);
         }
         &--image {
             height: 50px;

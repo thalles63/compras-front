@@ -1,19 +1,21 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { PageContainerModule } from '../components/page-container/page-container.module';
+import { FormsModule } from '@angular/forms';
 
-import { LoginComponent } from './login.component';
+import { LoginComponent } from './initial/initial.component';
 import { LoginService } from './login.service';
+import { LoginPasswordComponent } from './password/password.component';
 
 @NgModule({
 	declarations: [
-        LoginComponent
+        LoginComponent,
+		LoginPasswordComponent
 	],
 	imports: [
 		CommonModule,
-        PageContainerModule
+		FormsModule
 	],
-	exports: [LoginComponent],
+	exports: [LoginComponent, LoginPasswordComponent],
 	providers: [
         LoginService
 	],

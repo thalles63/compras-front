@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
 	templateUrl: './lista-compras.component.html',
@@ -16,7 +16,7 @@ export class ListaComprasComponent implements OnInit {
 		{ id: 4, descricao: 'Iogurte', checked: false },
 	];
 	filtro: string = '';
-	@ViewChild('filtro') input: ElementRef | undefined;
+	showAddButton: boolean = false;
 
 	ngOnInit(): void {
 		this.lista.sort((a: any, b: any) => {
@@ -35,9 +35,6 @@ export class ListaComprasComponent implements OnInit {
 		this.listaChecked.push(item);
 		this.listaChecked = this.sortLista(this.listaChecked);
 		this.lista.splice(this.lista.map((e: any) => { return e.id; }).indexOf(item.id), 1);
-		setTimeout(()=>{ 
-			this.input?.nativeElement.focus();
-		},0);  
 	}
 
 	uncheckItem(item: any) {
@@ -46,9 +43,19 @@ export class ListaComprasComponent implements OnInit {
 		this.lista.push(item);
 		this.lista = this.sortLista(this.lista);
 		this.listaChecked.splice(this.listaChecked.map((e: any) => { return e.id; }).indexOf(item.id), 1);
-		setTimeout(()=>{ 
-			this.input?.nativeElement.focus();
-		},0);  
+	}
+
+	checkIfListaEmpty() {
+		let listaHasItem = false;
+		let listaCheckedHasItem = false;
+		
+		if (this.lista.length > 0) 
+			listaHasItem = this.lista.filter((item: any) => item.descricao.includes(this.filtro)).length > 0;
+		
+		if (this.listaChecked.length > 0) 
+			listaCheckedHasItem = this.listaChecked.filter((item: any) => item.descricao.includes(this.filtro)).length > 0;
+		
+		this.showAddButton = (!!this.filtro && (!listaHasItem && !listaCheckedHasItem));
 	}
 
 	sortLista(lista: any) {
@@ -57,5 +64,18 @@ export class ListaComprasComponent implements OnInit {
 			var textB = b.descricao.toUpperCase();
 			return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
 		});
+	}
+
+	addToList() {
+		//salvar em back aqui e pegar retorno 
+		this.listaChecked.push({
+			id: 5,
+			descricao: this.filtro,
+			checked: true
+		});
+		this.listaChecked = this.sortLista(this.listaChecked);
+
+		this.filtro = '';
+		this.showAddButton = false;
 	}
 }

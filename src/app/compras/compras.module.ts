@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { PageContainerModule } from '../components/page-container/page-container.module';
 import { ComprasComponent } from './compras.component';
 import { ComprasRoutingModule } from './compras.routing';
 
@@ -8,8 +7,7 @@ import { ComprasRoutingModule } from './compras.routing';
 	declarations: [ComprasComponent],
 	imports: [
 		ComprasRoutingModule,
-		CommonModule,
-		PageContainerModule
+		CommonModule
 	],
 	exports: [ComprasComponent],
 	providers: [],

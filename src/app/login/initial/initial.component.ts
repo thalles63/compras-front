@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoginService } from './login.service';
-import { User } from './user';
+import { LoginService } from '../login.service';
+import { User } from '../models/user';
 
 @Component({
-	templateUrl: './login.component.html',
-	styleUrls: [ './login.component.scss' ]
+	templateUrl: './initial.component.html',
+	styleUrls: [ './initial.component.scss' ]
 })
 export class LoginComponent implements OnInit {
 	constructor(
@@ -32,6 +32,6 @@ export class LoginComponent implements OnInit {
 
     doLogin(user: User) {
         this.loginService.login(user);
-        this.router.navigate(['dashboard'], { replaceUrl: true });
+        this.router.navigate(['login/password'], { replaceUrl: true });
     }
 }

@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './login/auth.guard';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './login/initial/initial.component';
+import { LoginPasswordComponent } from './login/password/password.component';
 import { TemplateComponent } from './template/template.component';
 
 const routes: Routes = [
@@ -31,11 +32,20 @@ const routes: Routes = [
 	},
 	{
 		path: 'login',
-		component: LoginComponent
-	},
-    
-	// { path: 'error/not-found', component: CittaErrorPageComponent },
-	// { path: 'error/tenant', component: CittaTenantErrorPageComponent }
+		component: TemplateComponent,
+		children: [
+			{ 
+                path: '',
+                component: LoginComponent,
+                data: { animationState: 'One' }
+            },
+			{ 
+                path: 'password',
+                component: LoginPasswordComponent,
+                data: { animationState: 'Two' }
+            }
+		]
+	}
 ];
 
 @NgModule({

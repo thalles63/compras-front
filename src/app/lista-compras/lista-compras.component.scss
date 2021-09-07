@@ -67,9 +67,29 @@
         }
         &--description {
             cursor: pointer;
+            text-transform: capitalize;
         }
     }
     &__item.last {
         border-bottom: 0;
+    }
+}
+.no-records {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    
+    &__title {
+        text-align: center;
+        margin-top: 35px;
+    }
+    &__button {
+        color: #fff;
+        border-color: #009ef7;
+        background-color: #009ef7;
+        padding: 10px 20px;
+        margin-top: 10px;
+        font-weight: 500;
+        border-radius: 5px;
     }
 }

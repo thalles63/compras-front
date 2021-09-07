@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MenusService } from '../menus.service';
+import { MenusService } from '../menus/menus.service';
 
 @Component({
     selector: 'nav-bottom',
