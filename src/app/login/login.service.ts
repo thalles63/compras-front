@@ -7,14 +7,20 @@ export class LoginService {
 
     isLogged() {
         let user = JSON.parse(localStorage.getItem('user') || '{}');
-        return !!user.id;
+        return !!user.allowed;
     }
 
     logout() {
         localStorage.removeItem('user');
     }
 
-    login(user: User) {
+    chooseUser(user: User) {
+        localStorage.setItem('user', JSON.stringify(user));
+    }
+
+    doLogin(user: User, password: string) {
+        //vai pra back fazer login
+        user.allowed = true;
         localStorage.setItem('user', JSON.stringify(user));
     }
 }

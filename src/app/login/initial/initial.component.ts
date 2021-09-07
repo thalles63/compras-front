@@ -15,13 +15,13 @@ export class LoginComponent implements OnInit {
 
     users: User[] = [
         {
-            id: 1,
             nome: "Thalles Leonardelli",
+            username: 'thalles',
             imgNome: "thalles"
         },
         {
-            id: 2,
             nome: "Thays Maineri",
+            username: 'thays',
             imgNome: "Thays"
         }
     ]
@@ -30,8 +30,8 @@ export class LoginComponent implements OnInit {
     // jhgjhgjg
     }
 
-    doLogin(user: User) {
-        this.loginService.login(user);
+    chooseUser(user: User) {
+        this.loginService.chooseUser(user);
         this.router.navigate(['login/password'], { replaceUrl: true });
     }
 }

@@ -24,9 +24,19 @@ export class LoginPasswordComponent implements OnInit {
 	ngOnInit(): void {
         this.user = JSON.parse(localStorage.getItem('user') || '');
         this.user.primeiroNome = this.user.nome?.split(' ')[0];
+
+        setTimeout(() => {
+            this.number1?.nativeElement.focus()
+        }, 500);
     }
 
-    doLogin(form: any) {
+    doLogin() {
+        let senha = this.myform.controls['number1'].value + '' + 
+                    this.myform.controls['number2'].value + '' + 
+                    this.myform.controls['number3'].value + '' + 
+                    this.myform.controls['number4'].value;
+
+        this.loginService.doLogin(this.user, senha);
         this.router.navigate(['dashboard'], { replaceUrl: true });
     }
 

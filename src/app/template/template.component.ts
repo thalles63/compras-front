@@ -15,7 +15,6 @@ export class TemplateComponent implements OnInit {
 	showNavbar = true;
 
 	ngOnInit(): void {
-		console.log(this.router.url)
 		this.showNavbar = (this.router.url !== '/login' && this.router.url !== '/login/password')
 	}
 
