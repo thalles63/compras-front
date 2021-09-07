@@ -27,8 +27,7 @@ export class LoginPasswordComponent implements OnInit {
     }
 
     doLogin(form: any) {
-        console.log(form)
-        // this.router.navigate(['dashboard'], { replaceUrl: true });
+        this.router.navigate(['dashboard'], { replaceUrl: true });
     }
 
     goBack() {
