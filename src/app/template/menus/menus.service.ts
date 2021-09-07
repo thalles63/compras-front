@@ -12,13 +12,13 @@ export class MenusService {
                 link: 'dashboard'
             },
             {
-                titulo: 'Compras',
-                icone: 'la-shopping-cart',
-                link: 'compras'
+                titulo: 'Gastos',
+                icone: 'la-money-bill-wave',
+                link: 'gastos'
             },
             {
                 titulo: 'Lista',
-                icone: 'la-list-alt',
+                icone: 'la-shopping-cart',
                 link: 'lista-compras'
             },
             {

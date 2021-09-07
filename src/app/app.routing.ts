@@ -17,8 +17,8 @@ const routes: Routes = [
 				loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
 			},
 			{
-				path: 'compras',
-				loadChildren: () => import('./compras/compras.module').then(m => m.ComprasModule)
+				path: 'gastos',
+				loadChildren: () => import('./gastos/gastos.module').then(m => m.GastosModule)
 			},
 			{
 				path: 'lista-compras',
