@@ -1,7 +1,7 @@
 export interface User {
     id?: number;
     nome?: string;
-    imgNome?: string;
+    foto?: string;
     username?: string;
     primeiroNome?: string;
     allowed?: boolean;

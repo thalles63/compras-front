@@ -10,10 +10,12 @@ export class GastosComponent implements OnInit {
 
 	compras: any = [
 		{
+			data: '2021-09-07',
 			titulo: 'Netflix',
 			categoria: 'entretenimento',
 			valor: 47.00,
-			quemPagou: 'Thays'
+			idPagador: 2,
+			porcentagem: [{idPagador: 1, porcentagem: 65}, {idPagador: 2, porcentagem: 35}]
 		},
 		{
 			titulo: 'Kenji Sushi',

@@ -13,21 +13,13 @@ export class LoginComponent implements OnInit {
         private loginService: LoginService
 	) {}
 
-    users: User[] = [
-        {
-            nome: "Thalles Leonardelli",
-            username: 'thalles',
-            imgNome: "thalles"
-        },
-        {
-            nome: "Thays Maineri",
-            username: 'thays',
-            imgNome: "Thays"
-        }
-    ]
+    users: User[] = []
 
 	ngOnInit(): void {
-    // jhgjhgjg
+        this.loginService.getUsers()
+        .subscribe((response) => {
+            this.users = response;
+        });
     }
 
     chooseUser(user: User) {

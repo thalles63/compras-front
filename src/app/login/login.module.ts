@@ -1,4 +1,5 @@
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
@@ -13,9 +14,13 @@ import { LoginPasswordComponent } from './password/password.component';
 	],
 	imports: [
 		CommonModule,
-		FormsModule
+		FormsModule,
+        HttpClientModule,
 	],
-	exports: [LoginComponent, LoginPasswordComponent],
+	exports: [
+		LoginComponent, 
+		LoginPasswordComponent
+	],
 	providers: [
         LoginService
 	],
