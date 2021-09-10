@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from '../login.service';
 import { User } from '../models/user';
@@ -7,7 +7,7 @@ import { User } from '../models/user';
 	templateUrl: './initial.component.html',
 	styleUrls: [ './initial.component.scss' ]
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements AfterViewInit {
 	constructor(
 		private router: Router,
         private loginService: LoginService
@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
 
     users: User[] = []
 
-	ngOnInit(): void {
+	ngAfterViewInit(): void {
         this.loginService.getUsers()
         .subscribe((response) => {
             this.users = response;
@@ -23,7 +23,15 @@ export class LoginComponent implements OnInit {
     }
 
     chooseUser(user: User) {
-        this.loginService.chooseUser(user);
-        this.router.navigate(['login/password'], { replaceUrl: true });
+        this.loginService.getUsers()
+        .subscribe((response) => {
+            this.users = response;
+        });
+        this.loginService.getUsers()
+        .subscribe((response) => {
+            this.users = response;
+        });
+        // this.loginService.chooseUser(user);
+        // this.router.navigate(['login/password'], { replaceUrl: true });
     }
 }

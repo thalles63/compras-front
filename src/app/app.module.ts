@@ -10,10 +10,15 @@ import { LoginService } from './login/login.service';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { LoginModule } from './login/login.module';
+import { LoadingComponent } from './components/loading/loading.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { LoadingInterceptor } from './components/loading/loading.interceptor';
+import { LoadingService } from './components/loading/loading.service';
 
 @NgModule({
     declarations: [
-        AppComponent
+        AppComponent,
+        LoadingComponent
     ],
     imports: [
         BrowserModule,
@@ -28,7 +33,12 @@ import { LoginModule } from './login/login.module';
           registrationStrategy: 'registerWhenStable:30000'
         })
     ],
-    providers: [ AuthGuard, LoginService ],
+    providers: [ 
+        AuthGuard, 
+        LoginService,
+        LoadingService,
+        { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true }
+     ],
     bootstrap: [AppComponent]
 })
 export class AppModule { }
