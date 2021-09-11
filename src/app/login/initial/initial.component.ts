@@ -1,9 +1,12 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
+
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+
+import { UsuariosService } from '../../usuarios/usuario.service';
 import { LoginService } from '../login.service';
-import { User } from '../models/user';
+import { Usuario } from '../../usuarios/usuario';
 
 @Component({
 	templateUrl: './initial.component.html',
@@ -12,22 +15,23 @@ import { User } from '../models/user';
 export class LoginComponent implements AfterViewInit, OnDestroy {
 	constructor(
 		private router: Router,
+        private usuariosService: UsuariosService,
         private loginService: LoginService
 	) {}
 
-    users: User[] = []
+    usuarios: Usuario[] = []
     private ngUnsubscribe: Subject<any> = new Subject();
 
 	ngAfterViewInit(): void {
-        this.loginService.getUsers()
+        this.usuariosService.getUsuarios()
             .pipe(takeUntil(this.ngUnsubscribe))
-            .subscribe((response) => {
-                this.users = response;
+            .subscribe((response: Usuario[]) => {
+                this.usuarios = response;
             });
     }
 
-    chooseUser(user: User) {
-        this.loginService.chooseUser(user);
+    escolherUsuario(usuario: Usuario) {
+        this.loginService.escolherUsuario(usuario);
         this.router.navigate(['login/password'], { replaceUrl: true });
     }
 

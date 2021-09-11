@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from 'src/app/login/models/user';
+import { Usuario } from 'src/app/usuarios/usuario';
 import { DashboardService } from '../dashboard.service';
 
 @Component({
@@ -15,7 +15,7 @@ export class DashboardHeaderComponent implements OnInit {
     dia: number = 0;
     diaExtenso: string = '';
     mes: string = '';
-	user: User = {} as User;
+	usuario: Usuario = {} as Usuario;
 
 	ngOnInit(): void {
         let now = new Date();
@@ -23,6 +23,6 @@ export class DashboardHeaderComponent implements OnInit {
         this.dia = now.getDate();
         this.diaExtenso = this.dashboardService.getDiasDaSemana()[ now.getDay() ];
         this.mes = this.dashboardService.getMes()[ now.getMonth() ];
-        this.user = JSON.parse(localStorage.getItem('user') || '{}');
+        this.usuario = JSON.parse(localStorage.getItem('usuario') || '{}');
     }
 }

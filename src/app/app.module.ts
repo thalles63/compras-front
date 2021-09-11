@@ -14,6 +14,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoadingInterceptor } from './components/loading/loading.interceptor';
 import { LoadingService } from './components/loading/loading.service';
 import { ComponentStateDirective } from './components/loading/loading.directive';
+import { AuthInterceptor } from './login/auth.interceptor';
 
 @NgModule({
     declarations: [
@@ -41,6 +42,7 @@ import { ComponentStateDirective } from './components/loading/loading.directive'
     providers: [ 
         AuthGuard, 
         LoadingService,
+		{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true }
      ],
     bootstrap: [AppComponent]

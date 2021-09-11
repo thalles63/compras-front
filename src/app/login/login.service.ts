@@ -1,8 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpRequest } from '@angular/common/http';
 
 import { environment } from '../../environments/environment';
 import { Injectable } from '@angular/core';
-import { User } from './models/user';
+import { Usuario } from '../usuarios/usuario';
 
 @Injectable()
 export class LoginService {
@@ -13,23 +13,36 @@ export class LoginService {
     private API_URL = environment.API_URL;
 
     isLogged() {
-        let user = JSON.parse(localStorage.getItem('user') || '{}');
-        return !!user.token;
+        let usuario = JSON.parse(localStorage.getItem('usuario') || '{}');
+        return !!usuario.token;
     }
 
     logout() {
-        localStorage.removeItem('user');
+        localStorage.removeItem('usuario');
     }
 
-    chooseUser(user: User) {
-        localStorage.setItem('user-chosen', JSON.stringify(user));
+	addAuthHeader(request: HttpRequest<any>) {
+		const accessToken = this.getTokenFromStore();
+		const headers: any = {};
+
+		if (accessToken) {
+			headers['Authorization'] = accessToken;
+		}
+
+		return request.clone({
+			setHeaders: headers
+		});
+	}
+
+	getTokenFromStore(): string {
+		return JSON.parse(localStorage.getItem('usuario') || '').token;
+	}
+
+    escolherUsuario(usuario: Usuario) {
+        localStorage.setItem('usuario-escolhido', JSON.stringify(usuario));
     }
 
     login(username: string, password: string) {
-		return this.http.post<User>(`${ this.API_URL }/api/login`, { username , password });
-    }
-
-    getUsers() {
-		return this.http.get<User[]>(`${ this.API_URL }/api/usuarios`);
+		return this.http.post<Usuario>(`${ this.API_URL }/api/login`, { username , password });
     }
 }

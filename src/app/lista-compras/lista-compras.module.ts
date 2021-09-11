@@ -3,8 +3,9 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { FilterPipe } from '../pipes/filter/filter.pipe';
-import { ListaComprasComponent } from './lista-compras.component';
+import { ListaComprasComponent } from './components/lista-compras.component';
 import { ListaComprasRoutingModule } from './lista-compras.routing';
+import { ListaComprasService } from './lista-compras.service';
 
 @NgModule({
 	declarations: [ListaComprasComponent,FilterPipe],
@@ -14,7 +15,9 @@ import { ListaComprasRoutingModule } from './lista-compras.routing';
 		FormsModule
 	],
 	exports: [ListaComprasComponent],
-	providers: [],
+	providers: [
+		ListaComprasService
+	],
 	bootstrap: []
 })
 export class ListaComprasModule {

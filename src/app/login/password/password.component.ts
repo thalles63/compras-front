@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { LoginService } from '../login.service';
-import { User } from '../models/user';
+import { Usuario } from '../../usuarios/usuario';
 
 @Component({
 	templateUrl: './password.component.html',
@@ -18,13 +18,13 @@ export class LoginPasswordComponent implements OnInit, OnDestroy {
     @ViewChild('number1') number1: ElementRef | undefined;
     @ViewChild('myform') myform: any;
 
-    user: User = {} as User;
+    usuario: Usuario = {} as Usuario;
     error: string = '';
     private ngUnsubscribe: Subject<any> = new Subject();
 
 	ngOnInit(): void {
-        this.user = JSON.parse(localStorage.getItem('user-chosen') || '');
-        this.user.primeiroNome = this.user.nome?.split(' ')[0];
+        this.usuario = JSON.parse(localStorage.getItem('usuario-escolhido') || '');
+        this.usuario.primeiroNome = this.usuario.nome?.split(' ')[0];
 
         setTimeout(() => {
             this.number1?.nativeElement.focus()
@@ -37,12 +37,12 @@ export class LoginPasswordComponent implements OnInit, OnDestroy {
             return;
         }
 
-        this.loginService.login(this.user.username, senha)
+        this.loginService.login(this.usuario.username, senha)
             .pipe(takeUntil(this.ngUnsubscribe))
             .subscribe((response: any) => {
-                this.user.token = response.token;
-                localStorage.removeItem('user-chosen');
-                localStorage.setItem('user', JSON.stringify(this.user));
+                this.usuario.token = response.token;
+                localStorage.removeItem('usuario-escolhido');
+                localStorage.setItem('usuario', JSON.stringify(this.usuario));
                 this.router.navigate(['dashboard'], { replaceUrl: true });
             }, (e: any) => {
                 this.error = e.error.error;

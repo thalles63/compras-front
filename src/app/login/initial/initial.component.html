@@ -6,12 +6,12 @@
         <div class="login-body__welcome--title">Seja bem vindo(a)</div>
         <div class="login-body__welcome--subtitle">Escolha o seu usuário para continuar</div>
     </div>
-    <div class="login-body__users">
-        <div *ngFor="let user of users" class="login-body__users--item" (click)="chooseUser(user)">
-            <div class="login-body__users--image">
-                <img [src]="'/assets/img/users/' + user.foto" alt="">
+    <div class="login-body__usuarios">
+        <div *ngFor="let usuario of usuarios" class="login-body__usuarios--item" (click)="escolherUsuario(usuario)">
+            <div class="login-body__usuarios--image">
+                <img [src]="'/assets/img/usuarios/' + usuario.foto" alt="">
             </div>
-            <div class="login-body__users--name">{{user.nome}}</div>
+            <div class="login-body__usuarios--name">{{usuario.nome}}</div>
         </div>
     </div>
 </div>
