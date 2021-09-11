@@ -11,7 +11,6 @@ export class LoadingInterceptor implements HttpInterceptor {
         private loadingService: LoadingService) { }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<any> {
-		// retirar mocky
 		if (req.url.includes('/api')) {
 			return next.handle(req).pipe(
 				map((event: HttpEvent<any>) => {
@@ -23,6 +22,7 @@ export class LoadingInterceptor implements HttpInterceptor {
 					return event;
 				}),
 				catchError((error: HttpErrorResponse) => {
+					this.loadingService.reqDecrease();
 					return throwError(error);
 				}));
 		} else {

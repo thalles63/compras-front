@@ -26,7 +26,7 @@ export class LoginService {
     }
 
     login(username: string, password: string) {
-		return this.http.get<User[]>(`${ this.API_URL }/api/login?username=${username}&password=${password}`);
+		return this.http.post<User>(`${ this.API_URL }/api/login`, { username , password });
     }
 
     getUsers() {
