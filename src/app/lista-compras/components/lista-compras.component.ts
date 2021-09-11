@@ -31,11 +31,12 @@ export class ListaComprasComponent implements AfterViewInit, OnDestroy {
 	}
 
 	checkItem(item: ListaCompras) {
+		item.checado = true;
+		
 		this.listaComprasService.edit(item._id || '', item)
 			.pipe(takeUntil(this.ngUnsubscribe))
 			.subscribe(() => {
 				this.filtro = '';
-				item.checado = true;
 				this.listaChecked.push(item);
 				this.listaChecked = this.sortLista(this.listaChecked);
 				this.lista.splice(this.lista.map((e: ListaCompras) => { return e._id; }).indexOf(item._id), 1);
@@ -43,11 +44,12 @@ export class ListaComprasComponent implements AfterViewInit, OnDestroy {
 	}
 
 	uncheckItem(item: ListaCompras) {
+		item.checado = false;
+
 		this.listaComprasService.edit(item._id || '', item)
 			.pipe(takeUntil(this.ngUnsubscribe))
 			.subscribe(() => {
 				this.filtro = '';
-				item.checado = false;
 				this.lista.push(item);
 				this.lista = this.sortLista(this.lista);
 				this.listaChecked.splice(this.listaChecked.map((e: ListaCompras) => { return e._id; }).indexOf(item._id), 1);
