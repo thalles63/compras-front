@@ -23,15 +23,7 @@ export class LoginComponent implements AfterViewInit {
     }
 
     chooseUser(user: User) {
-        this.loginService.getUsers()
-        .subscribe((response) => {
-            this.users = response;
-        });
-        this.loginService.getUsers()
-        .subscribe((response) => {
-            this.users = response;
-        });
-        // this.loginService.chooseUser(user);
-        // this.router.navigate(['login/password'], { replaceUrl: true });
+        this.loginService.chooseUser(user);
+        this.router.navigate(['login/password'], { replaceUrl: true });
     }
 }

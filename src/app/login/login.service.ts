@@ -14,7 +14,7 @@ export class LoginService {
 
     isLogged() {
         let user = JSON.parse(localStorage.getItem('user') || '{}');
-        return !!user.allowed;
+        return !!user.token;
     }
 
     logout() {
@@ -22,13 +22,11 @@ export class LoginService {
     }
 
     chooseUser(user: User) {
-        localStorage.setItem('user', JSON.stringify(user));
+        localStorage.setItem('user-chosen', JSON.stringify(user));
     }
 
-    doLogin(user: User, password: string) {
-        //vai pra back fazer login
-        user.allowed = true;
-        localStorage.setItem('user', JSON.stringify(user));
+    login(username: string, password: string) {
+		return this.http.get<User[]>(`${ this.API_URL }/api/login?username=${username}&password=${password}`);
     }
 
     getUsers() {

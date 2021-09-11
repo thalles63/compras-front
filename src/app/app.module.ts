@@ -6,25 +6,27 @@ import { AppComponent } from './app.component';
 import { TemplateModule } from './template/template.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthGuard } from './login/auth.guard';
-import { LoginService } from './login/login.service';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { LoginModule } from './login/login.module';
 import { LoadingComponent } from './components/loading/loading.component';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoadingInterceptor } from './components/loading/loading.interceptor';
 import { LoadingService } from './components/loading/loading.service';
+import { ComponentStateDirective } from './components/loading/loading.directive';
 
 @NgModule({
     declarations: [
         AppComponent,
-        LoadingComponent
+        LoadingComponent,
+        ComponentStateDirective
     ],
     imports: [
         BrowserModule,
         AppRoutingModule,
         TemplateModule,
         BrowserAnimationsModule,
+        HttpClientModule,
         LoginModule,
         ServiceWorkerModule.register('ngsw-worker.js', {
           enabled: environment.production,
@@ -33,9 +35,11 @@ import { LoadingService } from './components/loading/loading.service';
           registrationStrategy: 'registerWhenStable:30000'
         })
     ],
+    exports: [
+        ComponentStateDirective
+    ],
     providers: [ 
         AuthGuard, 
-        LoginService,
         LoadingService,
         { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true }
      ],

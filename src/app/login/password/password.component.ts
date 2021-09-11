@@ -19,7 +19,7 @@ export class LoginPasswordComponent implements OnInit {
     @ViewChild('number4') number4: ElementRef | undefined;
     @ViewChild('myform') myform: any;
 
-    user: User = {};
+    user: User = {} as User;
 
 	ngOnInit(): void {
         this.user = JSON.parse(localStorage.getItem('user') || '');
@@ -36,8 +36,13 @@ export class LoginPasswordComponent implements OnInit {
                     this.myform.controls['number3'].value + '' + 
                     this.myform.controls['number4'].value;
 
-        this.loginService.doLogin(this.user, senha);
-        this.router.navigate(['dashboard'], { replaceUrl: true });
+        this.loginService.login(this.user.username, senha)
+        .subscribe(() => {
+            this.user.token = 'true';
+            localStorage.removeItem('user-chosen');
+            localStorage.setItem('user', JSON.stringify(this.user));
+            this.router.navigate(['dashboard'], { replaceUrl: true });
+        });
     }
 
     goBack() {

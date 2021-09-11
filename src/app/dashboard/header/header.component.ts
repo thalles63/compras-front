@@ -15,7 +15,7 @@ export class DashboardHeaderComponent implements OnInit {
     dia: number = 0;
     diaExtenso: string = '';
     mes: string = '';
-	user: User = {};
+	user: User = {} as User;
 
 	ngOnInit(): void {
         let now = new Date();
