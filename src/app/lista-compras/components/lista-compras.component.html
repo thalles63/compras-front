@@ -14,7 +14,8 @@
         <div class="lista__item"
              [class.last]="!!last && lista.length === 0"
              *ngFor="let item of listaChecked | filter: filtro; 
-                        let last = last; let index = index;">
+                        let last = last; let index = index;"
+             #myBounds>
 
             <div class="lista__item--deletar">
                 <i class="las la-trash"
@@ -26,11 +27,12 @@
                  [ngDraggable]="true"
                  [class.transition]="transition"
                  [position]="item.posicao"
+                 [preventDefaultEvent]="false"
+                 (stopped)="onStop(item)"ks
                  [lockAxis]="'y'"
-                 [preventDefaultEvent]="true"
-                 (stopped)="onStop(item)"
-                 (movingOffset)="onMoving($event)"
-                 [trackPosition]="true">
+                 (movingOffset)="onMoving($event, item)"
+                 [trackPosition]="true"
+                 [bounds]="myBounds" [inBounds]="inBounds" [outOfBounds]="myOutOfBounds">
                 <div class="lista__item--checkbox">
                     <input type="checkbox"
                            [(ngModel)]="item.checado">
@@ -56,7 +58,7 @@
                  [lockAxis]="'y'"
                  [preventDefaultEvent]="true"
                  (stopped)="onStop(item)"
-                 (movingOffset)="onMoving($event)"
+                 (movingOffset)="onMoving($event, item)"
                  [trackPosition]="true">
                 <div class="lista__item--checkbox">
                     <input type="checkbox"

@@ -19,6 +19,13 @@ export class ListaComprasComponent implements AfterViewInit, OnDestroy {
 	showAddButton: boolean = false;
 	movingOffset = { x: 0, y: 0 };
 	transition = false;
+	inBounds = true;
+  edge = {
+    top: false,
+    bottom: false,
+    left: true,
+    right: true
+  };
 	private ngUnsubscribe: Subject<any> = new Subject();
 
 	ngAfterViewInit(): void {
@@ -108,9 +115,30 @@ export class ListaComprasComponent implements AfterViewInit, OnDestroy {
 		}, 500)
 	}
 
-	onMoving(event: any) {
+	onMoving(event: any, item: ListaCompras) {
+		if (event.x > -5 && event.x < 5) {
+			this.myOutOfBounds['left'] = false;
+			this.myOutOfBounds['right'] = false;
+		} else {
+			
+			this.myOutOfBounds['left'] = true;
+			this.myOutOfBounds['right'] = true;
+		}
 		this.movingOffset.x = event.x;
 		this.movingOffset.y = event.y;
+	}
+	myOutOfBounds: any = {
+		top: false,
+		right: true,
+		bottom: false,
+		left: true
+	};
+	outOfBounds(position: any) {
+		if (this.myOutOfBounds[position]) {
+		  this.myOutOfBounds[position] = false;
+		} else {
+		  this.myOutOfBounds[position] = true;
+		}
 	}
 
 	ngOnDestroy() {
