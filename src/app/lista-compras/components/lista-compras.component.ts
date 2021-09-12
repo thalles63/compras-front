@@ -15,7 +15,6 @@ export class ListaComprasComponent implements AfterViewInit, OnDestroy {
 
 	filtro: string = '';
 	lista: ListaCompras[] = [] as ListaCompras[];
-	listaChecked: ListaCompras[] = [] as ListaCompras[];
 	showAddButton: boolean = false;
 	movingOffset = { x: 0, y: 0 };
 	transition = false;
@@ -27,62 +26,33 @@ export class ListaComprasComponent implements AfterViewInit, OnDestroy {
 		this.listaComprasService.list()
 			.pipe(takeUntil(this.ngUnsubscribe))
 			.subscribe((response: ListaCompras[]) => {
-				response = this.sortLista(response);
-
-				this.listaChecked = response.filter((item: ListaCompras) => !!item.checado);
-				this.lista = response.filter((item: ListaCompras) => !item.checado);
+				this.lista = response;
 			});
 	}
 
-	checkItem(item: ListaCompras) {
-		item.checado = true;
-
-		delete item.posicao;
-		delete item.deletado;
+	toggleItem(item: ListaCompras) {
+		item.checado = !item.checado;
+		delete item.screenProps;
 
 		this.listaComprasService.edit(item._id || '', item)
 			.pipe(takeUntil(this.ngUnsubscribe))
 			.subscribe(() => {
 				this.filtro = '';
-				this.listaChecked.push(item);
-				this.lista.splice(this.lista.map((e: ListaCompras) => { return e._id; }).indexOf(item._id), 1);
-			});
-	}
-
-	uncheckItem(item: ListaCompras) {
-		item.checado = false;
-
-		delete item.posicao;
-		delete item.deletado;
-
-		this.listaComprasService.edit(item._id || '', item)
-			.pipe(takeUntil(this.ngUnsubscribe))
-			.subscribe(() => {
-				this.filtro = '';
-				this.lista.push(item);
-				this.listaChecked.splice(this.listaChecked.map((e: ListaCompras) => { return e._id; }).indexOf(item._id), 1);
 			});
 	}
 
 	checkIfListaEmpty() {
 		let listaHasItem = false;
-		let listaCheckedHasItem = false;
 
 		if (this.lista.length > 0)
 			listaHasItem = this.lista.filter((item: any) => item.descricao.includes(this.filtro)).length > 0;
 
-		if (this.listaChecked.length > 0)
-			listaCheckedHasItem = this.listaChecked.filter((item: any) => item.descricao.includes(this.filtro)).length > 0;
-
-		this.showAddButton = (!!this.filtro && (!listaHasItem && !listaCheckedHasItem));
+		this.showAddButton = (!!this.filtro && (!listaHasItem && !listaHasItem));
 	}
 
 	sortLista(lista: any) {
-		return lista.sort((a: any, b: any) => {
-			var textA = a.descricao.toUpperCase();
-			var textB = b.descricao.toUpperCase();
-			return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
-		});
+		return lista.sort((a: ListaCompras, b: ListaCompras) => +b.checado - +a.checado
+			|| a.descricao.toUpperCase().localeCompare(b.descricao.toUpperCase()));
 	}
 
 	addToList() {
@@ -94,8 +64,7 @@ export class ListaComprasComponent implements AfterViewInit, OnDestroy {
 		this.listaComprasService.save(compra)
 			.pipe(takeUntil(this.ngUnsubscribe))
 			.subscribe((response: ListaCompras) => {
-				this.listaChecked.push(response);
-				this.listaChecked = this.sortLista(this.listaChecked);
+				this.lista.push(response);
 
 				this.filtro = '';
 				this.showAddButton = false;
@@ -104,17 +73,20 @@ export class ListaComprasComponent implements AfterViewInit, OnDestroy {
 
 	onStop(item: ListaCompras, lista: ListaCompras[], index: number) {
 		this.transition = true;
+		if (!item.screenProps) item.screenProps = {};
+		let val = item.screenProps.movingOffsetX || 0;
 
-		if (this.movingOffset.x < 130) {
-			item.posicao = { x: 0, y: 0 };
+		if (val < 130) {
+			item.screenProps.posicao = { x: 0, y: 0 };
 		} else {
-			if (this.movingOffset.x !== 0) {
-				item.posicao = { x: 500, y: 0 };
-	
+			if (item.screenProps.movingOffsetX !== 0) {
+				item.screenProps.posicao = { x: 500, y: 0 };
+
 				this.listaComprasService.delete(item._id)
 					.pipe(takeUntil(this.ngUnsubscribe))
 					.subscribe(() => {
-						item.deletado = true;
+						if (!item.screenProps) item.screenProps = {};
+						item.screenProps.deletado = true;
 						setTimeout(() => {
 							lista.splice(index, 1);
 						}, 500);
@@ -127,12 +99,13 @@ export class ListaComprasComponent implements AfterViewInit, OnDestroy {
 		}, 500)
 	}
 
-	onMoving(event: any) {
+	onMoving(event: any, item: ListaCompras) {
+		if (!item.screenProps) item.screenProps = {};
 		if (event.x > -5 && event.x < 5) {
 			this.setBounds(false);
 		}
-		this.movingOffset.x = event.x;
-		this.movingOffset.y = event.y;
+		item.screenProps.movingOffsetX = event.x;
+		item.screenProps.movingOffsetY = event.y;
 	}
 
 	setBounds(state: boolean) {

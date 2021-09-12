@@ -12,8 +12,8 @@
 
     <div class="lista">
         <div class="lista__item"
-             [class.deletado]="item.deletado"
-             *ngFor="let item of sortLista(listaChecked) | filter: filtro; 
+             [class.deletado]="item?.screenProps?.deletado"
+             *ngFor="let item of sortLista(lista) | filter: filtro; 
                         let last = last; let index = index;"
              #myBounds>
 
@@ -23,47 +23,15 @@
                 Remover
             </div>
             <div class="lista__item--container"
-                 [class.last]="!!last && lista.length === 0"
-                 (click)="uncheckItem(item)"
-                 [ngDraggable]="true"
-                 [class.transition]="transition"
-                 [position]="item.posicao"
-                 [preventDefaultEvent]="false"
-                 (stopped)="onStop(item, listaChecked, index)"
-                 [lockAxis]="'y'"
-                 (movingOffset)="onMoving($event)"
-                 [trackPosition]="true"
-                 [bounds]="myBounds"
-                 [inBounds]="inBounds"
-                 [outOfBounds]="myOutOfBounds">
-                <div class="lista__item--checkbox">
-                    <input type="checkbox"
-                           [(ngModel)]="item.checado">
-                </div>
-                <label class="lista__item--description">{{item.descricao}}</label>
-            </div>
-        </div>
-        <div class="lista__item"
-             [class.deletado]="item.deletado"
-             *ngFor="let item of sortLista(lista) 
-                    | filter: filtro; let last = last; let index = index;"
-             #myBounds>
-
-            <div class="lista__item--deletar">
-                <i class="las la-trash"
-                   aria-hidden="true"></i>
-                Remover
-            </div>
-            <div class="lista__item--container"
                  [class.last]="!!last"
-                 (click)="checkItem(item)"
+                 (click)="toggleItem(item)"
                  [ngDraggable]="true"
                  [class.transition]="transition"
-                 [position]="item.posicao"
+                 [position]="item?.screenProps?.posicao"
                  [preventDefaultEvent]="false"
                  (stopped)="onStop(item, lista, index)"
                  [lockAxis]="'y'"
-                 (movingOffset)="onMoving($event)"
+                 (movingOffset)="onMoving($event, item)"
                  [trackPosition]="true"
                  [bounds]="myBounds"
                  [inBounds]="inBounds"
@@ -81,5 +49,11 @@
         <div class="no-records__title">Nenhum produto encontrado com esse nome.</div>
         <div (click)="addToList()"
              class="no-records__button">Deseja adicionar à lista?</div>
+    </div>
+    <div class="no-records"
+         *ngIf="lista.length === 0 && lista.length === 0 && filtro.length === 0">
+        <div class="no-records__title">
+            Nenhum produto adicionado, adicione algum através do campo acima.
+        </div>
     </div>
 </div>
