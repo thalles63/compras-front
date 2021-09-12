@@ -3,4 +3,5 @@ export interface ListaCompras {
     descricao: string;
     checado: boolean;
     posicao?: any;
+    deletado?: boolean;
  }

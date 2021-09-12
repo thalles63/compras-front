@@ -39,6 +39,8 @@
         padding: 0;
         display: flex;
         position: relative;
+        height: 51px;
+        transition: 0.5s height;
         
         &--container {
             padding: 0 20px;
@@ -52,8 +54,12 @@
             border-bottom: 1px solid #d4d4d4;
         }
 
+        &--container.last {
+            border-bottom: 1px solid #FFF;
+        }
+
         &--container.transition {
-            transition: all 0.5s ease 0s;
+            transition: transform 0.5s ease 0s;
         }
 
         &--deletar {
@@ -69,6 +75,7 @@
             height: calc(100% - 2px);
             display: flex;
             align-items: center;
+            transition: 0.5s height;
 
             i {
                 font-size: 27px;
@@ -114,8 +121,8 @@
             text-transform: capitalize;
         }
     }
-    &__item.last {
-        border-bottom: 0;
+    &__item.deletado {
+        height: 0;
     }
 }
 .no-records {

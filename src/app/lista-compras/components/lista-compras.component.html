@@ -12,7 +12,7 @@
 
     <div class="lista">
         <div class="lista__item"
-             [class.last]="!!last && lista.length === 0"
+             [class.deletado]="item.deletado"
              *ngFor="let item of listaChecked | filter: filtro; 
                         let last = last; let index = index;"
              #myBounds>
@@ -23,12 +23,13 @@
                 Remover
             </div>
             <div class="lista__item--container"
+                 [class.last]="!!last && lista.length === 0"
                  (click)="uncheckItem(item)"
                  [ngDraggable]="true"
                  [class.transition]="transition"
                  [position]="item.posicao"
                  [preventDefaultEvent]="false"
-                 (stopped)="onStop(item)"
+                 (stopped)="onStop(item, listaChecked, index)"
                  [lockAxis]="'y'"
                  (movingOffset)="onMoving($event)"
                  [trackPosition]="true"
@@ -43,9 +44,9 @@
             </div>
         </div>
         <div class="lista__item"
-             [class.last]="!!last"
+             [class.deletado]="item.deletado"
              *ngFor="let item of lista 
-                    | filter: filtro; let last = last"
+                    | filter: filtro; let last = last; let index = index;"
              #myBounds>
 
             <div class="lista__item--deletar">
@@ -54,12 +55,13 @@
                 Remover
             </div>
             <div class="lista__item--container"
+                 [class.last]="!!last"
                  (click)="uncheckItem(item)"
                  [ngDraggable]="true"
                  [class.transition]="transition"
                  [position]="item.posicao"
                  [preventDefaultEvent]="false"
-                 (stopped)="onStop(item)"
+                 (stopped)="onStop(item, lista, index)"
                  [lockAxis]="'y'"
                  (movingOffset)="onMoving($event)"
                  [trackPosition]="true"

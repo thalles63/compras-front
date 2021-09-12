@@ -20,7 +20,7 @@ export class ListaComprasComponent implements AfterViewInit, OnDestroy {
 	movingOffset = { x: 0, y: 0 };
 	transition = false;
 	inBounds = true;
-	myOutOfBounds: any = { top: false, right: true, bottom: false, left: true };
+	myOutOfBounds: any = { top: false, right: true, bottom: false, left: false };
 	private ngUnsubscribe: Subject<any> = new Subject();
 
 	ngAfterViewInit(): void {
@@ -98,9 +98,23 @@ export class ListaComprasComponent implements AfterViewInit, OnDestroy {
 			});
 	}
 
-	onStop(item: ListaCompras) {
+	onStop(item: ListaCompras, lista: ListaCompras[], index: number) {
 		this.transition = true;
-		item.posicao = (this.movingOffset.x < 130) ? { x: 0, y: 0 } : { x: 500, y: 0 };
+
+		if (this.movingOffset.x < 130) {
+			item.posicao = { x: 0, y: 0 };
+		} else {
+			item.posicao = { x: 500, y: 0 };
+
+			this.listaComprasService.delete(item._id)
+				.pipe(takeUntil(this.ngUnsubscribe))
+				.subscribe(() => {
+					item.deletado = true;
+					setTimeout(() => {
+						lista.splice(index, 1);
+					}, 500);
+				});
+		}
 		this.setBounds(true);
 		setTimeout(() => {
 			this.transition = false;
@@ -116,7 +130,6 @@ export class ListaComprasComponent implements AfterViewInit, OnDestroy {
 	}
 
 	setBounds(state: boolean) {
-		this.myOutOfBounds['left'] = state;
 		this.myOutOfBounds['right'] = state;
 	}
 
