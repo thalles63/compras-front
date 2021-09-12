@@ -37,12 +37,14 @@ export class ListaComprasComponent implements AfterViewInit, OnDestroy {
 	checkItem(item: ListaCompras) {
 		item.checado = true;
 
+		delete item.posicao;
+		delete item.deletado;
+
 		this.listaComprasService.edit(item._id || '', item)
 			.pipe(takeUntil(this.ngUnsubscribe))
 			.subscribe(() => {
 				this.filtro = '';
 				this.listaChecked.push(item);
-				this.listaChecked = this.sortLista(this.listaChecked);
 				this.lista.splice(this.lista.map((e: ListaCompras) => { return e._id; }).indexOf(item._id), 1);
 			});
 	}
@@ -50,12 +52,14 @@ export class ListaComprasComponent implements AfterViewInit, OnDestroy {
 	uncheckItem(item: ListaCompras) {
 		item.checado = false;
 
+		delete item.posicao;
+		delete item.deletado;
+
 		this.listaComprasService.edit(item._id || '', item)
 			.pipe(takeUntil(this.ngUnsubscribe))
 			.subscribe(() => {
 				this.filtro = '';
 				this.lista.push(item);
-				this.lista = this.sortLista(this.lista);
 				this.listaChecked.splice(this.listaChecked.map((e: ListaCompras) => { return e._id; }).indexOf(item._id), 1);
 			});
 	}
@@ -104,16 +108,18 @@ export class ListaComprasComponent implements AfterViewInit, OnDestroy {
 		if (this.movingOffset.x < 130) {
 			item.posicao = { x: 0, y: 0 };
 		} else {
-			item.posicao = { x: 500, y: 0 };
-
-			this.listaComprasService.delete(item._id)
-				.pipe(takeUntil(this.ngUnsubscribe))
-				.subscribe(() => {
-					item.deletado = true;
-					setTimeout(() => {
-						lista.splice(index, 1);
-					}, 500);
-				});
+			if (this.movingOffset.x !== 0) {
+				item.posicao = { x: 500, y: 0 };
+	
+				this.listaComprasService.delete(item._id)
+					.pipe(takeUntil(this.ngUnsubscribe))
+					.subscribe(() => {
+						item.deletado = true;
+						setTimeout(() => {
+							lista.splice(index, 1);
+						}, 500);
+					});
+			}
 		}
 		this.setBounds(true);
 		setTimeout(() => {
