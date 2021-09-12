@@ -17,14 +17,16 @@ export class ListaComprasComponent implements AfterViewInit, OnDestroy {
 	lista: ListaCompras[] = [] as ListaCompras[];
 	listaChecked: ListaCompras[] = [] as ListaCompras[];
 	showAddButton: boolean = false;
-    private ngUnsubscribe: Subject<any> = new Subject();
+	movingOffset = { x: 0, y: 0 };
+	transition = false;
+	private ngUnsubscribe: Subject<any> = new Subject();
 
 	ngAfterViewInit(): void {
 		this.listaComprasService.list()
 			.pipe(takeUntil(this.ngUnsubscribe))
 			.subscribe((response: ListaCompras[]) => {
 				response = this.sortLista(response);
-		
+
 				this.listaChecked = response.filter((item: ListaCompras) => !!item.checado);
 				this.lista = response.filter((item: ListaCompras) => !item.checado);
 			});
@@ -32,7 +34,7 @@ export class ListaComprasComponent implements AfterViewInit, OnDestroy {
 
 	checkItem(item: ListaCompras) {
 		item.checado = true;
-		
+
 		this.listaComprasService.edit(item._id || '', item)
 			.pipe(takeUntil(this.ngUnsubscribe))
 			.subscribe(() => {
@@ -59,13 +61,13 @@ export class ListaComprasComponent implements AfterViewInit, OnDestroy {
 	checkIfListaEmpty() {
 		let listaHasItem = false;
 		let listaCheckedHasItem = false;
-		
-		if (this.lista.length > 0) 
+
+		if (this.lista.length > 0)
 			listaHasItem = this.lista.filter((item: any) => item.descricao.includes(this.filtro)).length > 0;
-		
-		if (this.listaChecked.length > 0) 
+
+		if (this.listaChecked.length > 0)
 			listaCheckedHasItem = this.listaChecked.filter((item: any) => item.descricao.includes(this.filtro)).length > 0;
-		
+
 		this.showAddButton = (!!this.filtro && (!listaHasItem && !listaCheckedHasItem));
 	}
 
@@ -94,8 +96,25 @@ export class ListaComprasComponent implements AfterViewInit, OnDestroy {
 			});
 	}
 
-    ngOnDestroy() {
-        this.ngUnsubscribe.next();
-        this.ngUnsubscribe.complete();
-    }
+	onStop(item: ListaCompras) {
+		this.transition = true;
+		if (this.movingOffset.x < 130) {
+			item.posicao = { x: 0, y: 0 };
+		} else {
+			item.posicao = { x: 500, y: 0 };
+		}
+		setTimeout(() => {
+			this.transition = false;
+		}, 500)
+	}
+
+	onMoving(event: any) {
+		this.movingOffset.x = event.x;
+		this.movingOffset.y = event.y;
+	}
+
+	ngOnDestroy() {
+		this.ngUnsubscribe.next();
+		this.ngUnsubscribe.complete();
+	}
 }

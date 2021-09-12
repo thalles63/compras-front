@@ -1,40 +1,75 @@
 <div class="lista-compras">
     <div class="title">Lista de Compras</div>
-    
+
     <div class="input">
         <i class="las la-search input__icon"
-            aria-hidden="true"></i>
+           aria-hidden="true"></i>
         <input type="text"
-                class="input__field"
-                (keyup)="checkIfListaEmpty()"
-                [(ngModel)]="filtro" />
+               class="input__field"
+               (keyup)="checkIfListaEmpty()"
+               [(ngModel)]="filtro" />
     </div>
-    
+
     <div class="lista">
         <div class="lista__item"
-                [class.last]="!!last && lista.length === 0"
-                *ngFor="let item of listaChecked | filter: filtro; 
-                        let last = last; let index = index;"
-                (click)="uncheckItem(item)">
-            <div class="lista__item--checkbox">
-                <input type="checkbox"
-                        [(ngModel)]="item.checado">
+             [class.last]="!!last && lista.length === 0"
+             *ngFor="let item of listaChecked | filter: filtro; 
+                        let last = last; let index = index;">
+
+            <div class="lista__item--deletar">
+                <i class="las la-trash"
+                   aria-hidden="true"></i>
+                Remover
             </div>
-            <label class="lista__item--description">{{item.descricao}}</label>
+            <div class="lista__item--container"
+                 (click)="uncheckItem(item)"
+                 [ngDraggable]="true"
+                 [class.transition]="transition"
+                 [position]="item.posicao"
+                 [lockAxis]="'y'"
+                 [preventDefaultEvent]="true"
+                 (stopped)="onStop(item)"
+                 (movingOffset)="onMoving($event)"
+                 [trackPosition]="true">
+                <div class="lista__item--checkbox">
+                    <input type="checkbox"
+                           [(ngModel)]="item.checado">
+                </div>
+                <label class="lista__item--description">{{item.descricao}}</label>
+            </div>
         </div>
         <div class="lista__item"
-                [class.last]="!!last"
-                *ngFor="let item of lista | filter: filtro; let last = last"
-                (click)="checkItem(item)">
-            <div class="lista__item--checkbox">
-                <input type="checkbox"
-                        [(ngModel)]="item.checado">
+             [class.last]="!!last"
+             *ngFor="let item of lista 
+                    | filter: filtro; let last = last">
+
+            <div class="lista__item--deletar">
+                <i class="las la-trash"
+                   aria-hidden="true"></i>
+                Remover
             </div>
-            <label class="lista__item--description">{{item.descricao}}</label>
+            <div class="lista__item--container"
+                 (click)="uncheckItem(item)"
+                 [ngDraggable]="true"
+                 [class.transition]="transition"
+                 [position]="item.posicao"
+                 [lockAxis]="'y'"
+                 [preventDefaultEvent]="true"
+                 (stopped)="onStop(item)"
+                 (movingOffset)="onMoving($event)"
+                 [trackPosition]="true">
+                <div class="lista__item--checkbox">
+                    <input type="checkbox"
+                           [(ngModel)]="item.checado">
+                </div>
+                <label class="lista__item--description">{{item.descricao}}</label>
+            </div>
         </div>
     </div>
-    <div class="no-records" *ngIf="showAddButton">
+    <div class="no-records"
+         *ngIf="showAddButton">
         <div class="no-records__title">Nenhum produto encontrado com esse nome.</div>
-        <div (click)="addToList()" class="no-records__button">Deseja adicionar à lista?</div>
+        <div (click)="addToList()"
+             class="no-records__button">Deseja adicionar à lista?</div>
     </div>
 </div>

@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { AngularDraggableModule } from 'angular2-draggable';
 
 import { FilterPipe } from '../pipes/filter/filter.pipe';
 import { ListaComprasComponent } from './components/lista-compras.component';
@@ -12,7 +13,8 @@ import { ListaComprasService } from './lista-compras.service';
 	imports: [
 		ListaComprasRoutingModule,
 		CommonModule,
-		FormsModule
+		FormsModule,
+		AngularDraggableModule 
 	],
 	exports: [ListaComprasComponent],
 	providers: [
