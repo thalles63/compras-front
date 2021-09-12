@@ -20,12 +20,7 @@ export class ListaComprasComponent implements AfterViewInit, OnDestroy {
 	movingOffset = { x: 0, y: 0 };
 	transition = false;
 	inBounds = true;
-  edge = {
-    top: false,
-    bottom: false,
-    left: true,
-    right: true
-  };
+	myOutOfBounds: any = { top: false, right: true, bottom: false, left: true };
 	private ngUnsubscribe: Subject<any> = new Subject();
 
 	ngAfterViewInit(): void {
@@ -105,40 +100,24 @@ export class ListaComprasComponent implements AfterViewInit, OnDestroy {
 
 	onStop(item: ListaCompras) {
 		this.transition = true;
-		if (this.movingOffset.x < 130) {
-			item.posicao = { x: 0, y: 0 };
-		} else {
-			item.posicao = { x: 500, y: 0 };
-		}
+		item.posicao = (this.movingOffset.x < 130) ? { x: 0, y: 0 } : { x: 500, y: 0 };
+		this.setBounds(true);
 		setTimeout(() => {
 			this.transition = false;
 		}, 500)
 	}
 
-	onMoving(event: any, item: ListaCompras) {
+	onMoving(event: any) {
 		if (event.x > -5 && event.x < 5) {
-			this.myOutOfBounds['left'] = false;
-			this.myOutOfBounds['right'] = false;
-		} else {
-			
-			this.myOutOfBounds['left'] = true;
-			this.myOutOfBounds['right'] = true;
+			this.setBounds(false);
 		}
 		this.movingOffset.x = event.x;
 		this.movingOffset.y = event.y;
 	}
-	myOutOfBounds: any = {
-		top: false,
-		right: true,
-		bottom: false,
-		left: true
-	};
-	outOfBounds(position: any) {
-		if (this.myOutOfBounds[position]) {
-		  this.myOutOfBounds[position] = false;
-		} else {
-		  this.myOutOfBounds[position] = true;
-		}
+
+	setBounds(state: boolean) {
+		this.myOutOfBounds['left'] = state;
+		this.myOutOfBounds['right'] = state;
 	}
 
 	ngOnDestroy() {
