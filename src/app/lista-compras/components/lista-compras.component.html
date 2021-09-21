@@ -44,10 +44,11 @@
             </div>
         </div>
     </div>
-    <div class="no-records"
-         *ngIf="showAddButton">
-        <div class="no-records__title">Nenhum produto encontrado com esse nome.</div>
+    <div class="no-records">
+        <div *ngIf="showAddButton"
+             class="no-records__title">Nenhum produto encontrado com esse nome.</div>
         <div (click)="addToList()"
+             *ngIf="!!this.filtro"
              class="no-records__button">Deseja adicionar à lista?</div>
     </div>
     <div class="no-records"

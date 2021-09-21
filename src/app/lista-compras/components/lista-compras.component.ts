@@ -47,7 +47,7 @@ export class ListaComprasComponent implements AfterViewInit, OnDestroy {
 		if (this.lista.length > 0)
 			listaHasItem = this.lista.filter((item: any) => item.descricao.includes(this.filtro)).length > 0;
 
-		this.showAddButton = (!!this.filtro && (!listaHasItem && !listaHasItem));
+		this.showAddButton = (!!this.filtro && !listaHasItem);
 	}
 
 	sortLista(lista: any) {
