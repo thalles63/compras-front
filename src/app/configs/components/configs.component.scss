@@ -1,0 +1,65 @@
+.btn-sair {
+    color: #fff;
+    border-color: #f1416c;
+    background-color: #f1416c;
+    padding: 10px 20px;
+    margin-top: 20px;
+    font-weight: 500;
+    border-radius: 5px;
+    text-align: center;
+}
+.title {
+    font-weight: bold;
+    font-size: 19px;
+    margin-bottom: 10px;
+    padding-top: 40px;
+}
+.configs {
+    padding: 0 30px;
+}
+.percent {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+
+    &__title {
+        flex: 1 0 100%;
+        margin-bottom: 10px;
+        margin-top: 10px;
+    }
+    &__value {
+        display: flex;
+        align-items: flex-end;
+        flex-grow: 1;
+        justify-content: center;
+
+        &--number {
+            font-size: 90px;
+            height: 110px;
+            overflow: hidden;
+        }
+        &--symbol {
+            font-size: 34px;
+        }
+    }
+    &__controls {
+        font-size: 30px;
+        border: 1px solid #c5c5c5;
+        width: 43px;
+        border-radius: 15px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+
+        &--plus {
+            flex: 1 0 100%;
+            text-align: center;
+            border-bottom: 1px solid #d9d9d9;
+        }
+        &--minus {
+            flex: 1 0 100%;
+            text-align: center;
+        }
+    }
+}

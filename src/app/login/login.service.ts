@@ -38,6 +38,10 @@ export class LoginService {
 		return JSON.parse(localStorage.getItem('usuario') || '').token;
 	}
 
+    getUsuario(): Usuario {
+        return JSON.parse(localStorage.getItem('usuario') || '');
+    }
+
     escolherUsuario(usuario: Usuario) {
         localStorage.setItem('usuario-escolhido', JSON.stringify(usuario));
     }

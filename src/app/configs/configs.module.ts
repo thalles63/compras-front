@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { ConfigsComponent } from './configs.component';
+import { ConfigsComponent } from './components/configs.component';
 import { ConfigsRoutingModule } from './configs.routing';
+import { ConfigsService } from './configs.service';
 
 @NgModule({
 	declarations: [ConfigsComponent],
@@ -10,7 +11,9 @@ import { ConfigsRoutingModule } from './configs.routing';
 		CommonModule
 	],
 	exports: [ConfigsComponent],
-	providers: [],
+	providers: [
+		ConfigsService
+	],
 	bootstrap: []
 })
 export class ConfigsModule {

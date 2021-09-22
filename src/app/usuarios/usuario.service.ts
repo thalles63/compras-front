@@ -6,13 +6,13 @@ import { Usuario } from '../usuarios/usuario';
 
 @Injectable()
 export class UsuariosService {
-	constructor(
+    constructor(
         private http: HttpClient
-    ) {}
+    ) { }
 
     private API_URL = environment.API_URL + '/api/usuarios';
 
     getUsuarios() {
-		return this.http.get<Usuario[]>(`${ this.API_URL }`);
+        return this.http.get<Usuario[]>(`${this.API_URL}`);
     }
 }

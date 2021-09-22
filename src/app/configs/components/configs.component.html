@@ -1,0 +1,17 @@
+<div class="configs">
+    <div class="title">Configurações</div>
+
+    <div class="percent">
+        <div class="percent__title">Porcentagem na divisão de gastos</div>
+        <div class="percent__value">
+            <div class="percent__value--number">{{configs.porcentagem}}</div>
+            <span class="percent__value--symbol">%</span>
+        </div>
+        <div class="percent__controls">
+            <div class="percent__controls--plus" (click)="increaseValue()">+</div>
+            <div class="percent__controls--minus" (click)="decreaseValue()">-</div>
+        </div>
+    </div>
+
+    <div class="btn-sair" (click)="logout()">Sair</div>
+</div>
