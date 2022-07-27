@@ -23,3 +23,233 @@ html, body {
 .align-center {
     align-items: center;
 }
+
+modal-window {
+    .component-host-scrollable {
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+    }
+}
+
+.modal-open {
+    overflow: hidden;
+}
+
+.modal-open .modal {
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.fade-modal {
+    transition: opacity 0.15s linear;
+}
+
+@media screen and (prefers-reduced-motion: reduce) {
+    .fade-modal {
+        transition: none;
+    }
+}
+
+.fade-modal:not(.show) {
+    opacity: 0;
+}
+
+.modal.fade-modal .modal-dialog {
+    transform: none;
+}
+
+@media screen and (prefers-reduced-motion: reduce) {
+    .modal.fade-modal .modal-dialog {
+        transition: none;
+    }
+}
+
+ngb-modal-window {
+    &.modal.fade {
+        opacity: 0;
+        transition: opacity 0.2s linear;
+    }
+
+    &.modal.fade.show {
+        opacity: 1;
+    }
+
+    &.modal {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 1050;
+        overflow: hidden;
+        outline: 0;
+    }
+
+    .modal-dialog {
+        position: relative;
+        width: auto;
+        margin: 0.5rem;
+        pointer-events: none;
+    }
+
+    &.modal.show .modal-dialog {
+        -webkit-transform: none;
+        transform: none;
+    }
+
+    .modal-dialog-centered {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-align: center;
+        align-items: center;
+        min-height: calc(100% - (0.5rem * 2));
+    }
+
+    .modal-dialog-centered::before {
+        display: block;
+        height: calc(100vh - (0.5rem * 2));
+        content: "";
+    }
+
+    .modal-content {
+        position: relative;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        width: 100%;
+        pointer-events: auto;
+        background-color: #FFF;
+        background-clip: padding-box;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        border-radius: 0.3rem;
+        outline: 0;
+    }
+
+    &.modal {
+        .modal-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-start;
+            padding: 20px;
+            border-bottom: 1px solid #e6eaee;
+            border-top-left-radius: .3rem;
+            border-top-right-radius: .3rem;
+            -webkit-box-shadow: 0px 1px 4px 0px rgb(0 0 0 / 11%);
+            box-shadow: 0px 1px 4px 0px rgb(0 0 0 / 11%);
+        }
+
+        .modal-header .close {
+            padding: 1rem;
+            margin: -1rem -1rem -1rem auto;
+        }
+
+        .modal-title {
+            line-height: 1.5;
+            font-size: 16px;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .modal-body {
+            position: relative;
+            -ms-flex: 1 1 auto;
+            flex: 1 1 auto;
+            padding: 20px;
+        }
+
+        .modal-footer {
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-align: center;
+            align-items: center;
+            -ms-flex-pack: end;
+            justify-content: flex-end;
+            padding: 20px;
+            border-top: 1px solid #e6eaee;
+
+
+        }
+
+        .modal-footer> :not(:first-child) {
+            margin-left: 0.25rem;
+        }
+
+        .modal-footer> :not(:last-child) {
+            margin-right: 0.25rem;
+        }
+    }
+
+    .modal-scrollbar-measure {
+        position: absolute;
+        top: -9999px;
+        width: 50px;
+        height: 50px;
+        overflow: scroll;
+    }
+
+    @media (min-width: 576px) {
+        .modal-dialog {
+            max-width: 500px;
+            margin: 1.75rem auto;
+        }
+
+        .modal-dialog-centered {
+            min-height: calc(100% - (1.75rem * 2));
+        }
+
+        .modal-dialog-centered::before {
+            height: calc(100vh - (1.75rem * 2));
+        }
+
+        .modal-sm {
+            max-width: 300px;
+        }
+    }
+
+    @media (min-width: 992px) {
+        .modal-lg {
+            max-width: 800px;
+        }
+
+        .modal-xl {
+            max-width: 900px;
+        }
+    }
+
+    @media (min-width: 1200px) {
+        .modal-xl {
+            max-width: 1400px;
+        }
+    }
+}
+
+ngb-modal-backdrop {
+    &.modal-backdrop {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 1040;
+        background-color: #000;
+        opacity: 0;
+    }
+
+    &.modal-backdrop.fade-modal {
+        opacity: 0;
+    }
+
+    &.modal-backdrop.show {
+        opacity: 0.5;
+    }
+}
+
+.modal-body {
+    .neo-accordion {
+        .neo-accordion__body {
+            padding: 0 !important;
+        }
+    }
+}

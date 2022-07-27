@@ -1,9 +1,10 @@
-<div class="lista-compras">
+<panel>
     <div class="title">Lista de Compras</div>
 
     <div class="input">
         <i class="las la-search input__icon"
-           aria-hidden="true"></i>
+           aria-hidden="true">
+        </i>
         <input type="text"
                class="input__field"
                (keyup)="checkIfListaEmpty()"
@@ -12,24 +13,21 @@
 
     <div class="lista">
         <div class="lista__item"
-             [class.deletado]="item?.screenProps?.deletado"
-             *ngFor="let item of sortLista(lista) | filter: filtro; 
-                        let last = last; let index = index;"
-             #myBounds>
+             *ngFor="let item of sortLista(lista) | filter: filtro; let last = last; let index = index">
 
-            <div class="lista__item--deletar">
-                <i class="las la-trash"
-                   aria-hidden="true"></i>
-                Remover
-            </div>
             <div class="lista__item--container"
                  [class.last]="!!last"
                  (click)="toggleItem(item)">
                 <div class="lista__item--checkbox">
                     <input type="checkbox"
-                           [(ngModel)]="item.checado">
+                           [(ngModel)]="item.checado" />
                 </div>
                 <label class="lista__item--description">{{item.descricao}}</label>
+
+                <i class="las la-trash excluir"
+                   aria-hidden="true"
+                   (click)="abreModalRemoveItem(item, index, $event)">
+                </i>
             </div>
         </div>
     </div>
@@ -46,4 +44,4 @@
             Nenhum produto adicionado, adicione algum através do campo acima.
         </div>
     </div>
-</div>
+</panel>

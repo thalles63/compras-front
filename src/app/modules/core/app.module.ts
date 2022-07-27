@@ -3,7 +3,7 @@ import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { ServiceWorkerModule } from "@angular/service-worker";
 import { NgxsModule } from "@ngxs/store";
-import { LoadingComponent } from "src/app/components/loading/loading.component";
+import { ComponentsModule } from "src/app/components/components.module";
 import { TemplateModule } from "src/app/components/template/template.module";
 import { AuthGuard } from "src/app/helpers/guards/auth.guard";
 import { AuthInterceptor } from "src/app/helpers/interceptors/auth.interceptor";
@@ -16,13 +16,14 @@ import { AppComponent } from "./app.component";
 import { AppRoutingModule } from "./app.routing";
 
 @NgModule({
-    declarations: [AppComponent, LoadingComponent],
+    declarations: [AppComponent],
     imports: [
         BrowserModule,
         AppRoutingModule,
         TemplateModule,
         HttpClientModule,
         LoginModule,
+        ComponentsModule,
         NgxsModule.forRoot([CoreState]),
         ServiceWorkerModule.register("ngsw-worker.js", {
             enabled: environment.production,

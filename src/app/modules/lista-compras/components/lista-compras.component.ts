@@ -1,6 +1,8 @@
 import { AfterViewInit, Component, OnDestroy } from "@angular/core";
-import { Subject } from "rxjs";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { merge, Subject } from "rxjs";
 import { takeUntil } from "rxjs/operators";
+import { ConfirmationModal } from "src/app/components/confirmationModal/confirmationModal.component";
 import { ListaComprasService } from "../lista-compras.service";
 import { ListaCompras } from "../models/lista-compras";
 
@@ -9,15 +11,11 @@ import { ListaCompras } from "../models/lista-compras";
     styleUrls: ["./lista-compras.component.scss"]
 })
 export class ListaComprasComponent implements AfterViewInit, OnDestroy {
-    constructor(private listaComprasService: ListaComprasService) {}
+    constructor(private listaComprasService: ListaComprasService, private modalService: NgbModal) {}
 
     filtro = "";
     lista: ListaCompras[] = [] as ListaCompras[];
     showAddButton = false;
-    movingOffset = { x: 0, y: 0 };
-    transition = false;
-    inBounds = true;
-    myOutOfBounds: any = { top: false, right: true, bottom: false, left: false };
     ngUnsubscribe = new Subject<void>();
 
     ngAfterViewInit(): void {
@@ -31,7 +29,6 @@ export class ListaComprasComponent implements AfterViewInit, OnDestroy {
 
     toggleItem(item: ListaCompras) {
         item.checado = !item.checado;
-        delete item.screenProps;
 
         this.listaComprasService
             .edit(item._id || "", item)
@@ -41,16 +38,41 @@ export class ListaComprasComponent implements AfterViewInit, OnDestroy {
             });
     }
 
+    abreModalRemoveItem(item: ListaCompras, index: number, event: any) {
+        event.stopPropagation();
+
+        const modal = this.modalService.open(ConfirmationModal, { size: "md" });
+
+        modal.componentInstance.title = "Deseja realmente excluir?";
+        modal.componentInstance.body = `Deseja excluir o item: ${item.descricao}`;
+
+        const modalClosed = merge(modal.closed, modal.dismissed);
+        modalClosed.pipe(takeUntil(this.ngUnsubscribe)).subscribe((result: boolean) => {
+            if (result) {
+                this.removeItem(item, index);
+            }
+        });
+    }
+
+    removeItem(item: ListaCompras, index: number) {
+        this.listaComprasService
+            .delete(item._id)
+            .pipe(takeUntil(this.ngUnsubscribe))
+            .subscribe(() => {
+                this.lista.splice(index, 1);
+            });
+    }
+
     checkIfListaEmpty() {
         let listaHasItem = false;
 
         if (this.lista.length > 0)
-            listaHasItem = this.lista.filter((item: any) => item.descricao.includes(this.filtro)).length > 0;
+            listaHasItem = this.lista.filter((item: ListaCompras) => item.descricao.includes(this.filtro)).length > 0;
 
         this.showAddButton = !!this.filtro && !listaHasItem;
     }
 
-    sortLista(lista: any) {
+    sortLista(lista: ListaCompras[]) {
         return lista.sort(
             (a: ListaCompras, b: ListaCompras) =>
                 +b.checado - +a.checado || a.descricao.toUpperCase().localeCompare(b.descricao.toUpperCase())
@@ -72,48 +94,6 @@ export class ListaComprasComponent implements AfterViewInit, OnDestroy {
                 this.filtro = "";
                 this.showAddButton = false;
             });
-    }
-
-    onStop(item: ListaCompras, lista: ListaCompras[], index: number) {
-        this.transition = true;
-        if (!item.screenProps) item.screenProps = {};
-        const val = item.screenProps.movingOffsetX || 0;
-
-        if (val < 130) {
-            item.screenProps.posicao = { x: 0, y: 0 };
-        } else {
-            if (item.screenProps.movingOffsetX !== 0) {
-                item.screenProps.posicao = { x: 500, y: 0 };
-
-                this.listaComprasService
-                    .delete(item._id)
-                    .pipe(takeUntil(this.ngUnsubscribe))
-                    .subscribe(() => {
-                        if (!item.screenProps) item.screenProps = {};
-                        item.screenProps.deletado = true;
-                        setTimeout(() => {
-                            lista.splice(index, 1);
-                        }, 500);
-                    });
-            }
-        }
-        this.setBounds(true);
-        setTimeout(() => {
-            this.transition = false;
-        }, 500);
-    }
-
-    onMoving(event: any, item: ListaCompras) {
-        if (!item.screenProps) item.screenProps = {};
-        if (event.x > -5 && event.x < 5) {
-            this.setBounds(false);
-        }
-        item.screenProps.movingOffsetX = event.x;
-        item.screenProps.movingOffsetY = event.y;
-    }
-
-    setBounds(state: boolean) {
-        this.myOutOfBounds["right"] = state;
     }
 
     ngOnDestroy() {

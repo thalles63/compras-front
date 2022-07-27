@@ -1,0 +1,27 @@
+<div class="modal-header">
+    <h4 class="modal-title">
+        <strong>{{title}}</strong>
+    </h4>
+    <button type="button"
+            class="close"
+            (click)="btnClick(false)">
+        <i class="las la-times"
+           aria-hidden="true">
+        </i>
+    </button>
+</div>
+<div class="modal-body">
+    <div>
+        <p [innerHtml]="body"></p>
+    </div>
+</div>
+<div class="modal-footer">
+    <button (click)="btnClick(false)"
+            class="button-nao">
+        Não
+    </button>
+    <button (click)="btnClick(true)"
+            class="button-sim">
+        Sim
+    </button>
+</div>
