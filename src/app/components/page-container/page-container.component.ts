@@ -1,11 +1,8 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
 @Component({
-    selector: 'page-container',
-	templateUrl: './page-container.component.html',
-	styleUrls: [ './page-container.component.scss' ]
+    selector: "page-container",
+    templateUrl: "./page-container.component.html",
+    styleUrls: ["./page-container.component.scss"]
 })
-export class PageContainerComponent {
-	constructor(
-	) {}
-}
+export class PageContainerComponent {}

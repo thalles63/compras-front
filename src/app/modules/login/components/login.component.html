@@ -1,0 +1,9 @@
+<div class="login-body">
+    <user *ngIf="!selectedUser.nome"
+          [(selectedUser)]="selectedUser">
+    </user>
+
+    <password *ngIf="!!selectedUser.nome"
+              [(selectedUser)]="selectedUser">
+    </password>
+</div>

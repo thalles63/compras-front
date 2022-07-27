@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import { Select } from "@ngxs/store";
 import { Observable } from "rxjs";
-import { CoreState } from "../store/core.state";
+import { CoreState } from "src/app/helpers/store/core.state";
 
 @Component({
     selector: "loading",

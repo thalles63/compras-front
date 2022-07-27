@@ -1,0 +1,21 @@
+<div class="logo">
+    <img src="/assets/img/logo.png"
+         alt="logomarca do sistema">
+</div>
+
+<div class="welcome">
+    <div class="welcome__title">Seja bem vindo(a)</div>
+    <div class="welcome__subtitle">Escolha o seu usuário para continuar</div>
+</div>
+
+<div class="users">
+    <div *ngFor="let user of users"
+         class="users__item"
+         (click)="escolherUsuario(user)">
+        <div class="users__image">
+            <img [src]="'/assets/img/usuarios/' + user.foto"
+                 alt="foto do usuário">
+        </div>
+        <div class="users__name">{{user.nome}}</div>
+    </div>
+</div>
