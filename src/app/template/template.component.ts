@@ -1,26 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, RouterOutlet } from '@angular/router';
-import { routeTransitionAnimations } from './route-transition-animations';
+import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 
 @Component({
-	templateUrl: './template.component.html',
-	styleUrls: ['./template.component.scss'],
-	animations: [ routeTransitionAnimations ]
+    templateUrl: "./template.component.html",
+    styleUrls: ["./template.component.scss"]
 })
 export class TemplateComponent implements OnInit {
-	constructor(
-		private router: Router
-	) { }
+    constructor(private router: Router) {}
 
-	showNavbar = true;
+    showNavbar = true;
 
-	ngOnInit(): void {
-		this.showNavbar = (this.router.url !== '/login' && this.router.url !== '/login/password')
-	}
-
-	prepareRoute(outlet: RouterOutlet) {
-		return outlet &&
-			outlet.activatedRouteData &&
-			outlet.activatedRouteData['animationState'];
-	}
+    ngOnInit(): void {
+        this.showNavbar = this.router.url !== "/login" && this.router.url !== "/login/password";
+    }
 }

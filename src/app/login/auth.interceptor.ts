@@ -1,15 +1,11 @@
-import { HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { from, Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
-import { LoginService } from './login.service';
+import { HttpHandler, HttpInterceptor, HttpRequest } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
+import { LoginService } from "./login.service";
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-
-    constructor(
-        public loginService: LoginService
-    ) { }
+    constructor(public loginService: LoginService) {}
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<any> {
         const authenticatedAccess = this.authenticatedAccess(request.url);
@@ -23,8 +19,10 @@ export class AuthInterceptor implements HttpInterceptor {
     }
 
     private authenticatedAccess(url: string) {
-        if (url.includes('/api/login')) { return false; }
-        if (url.includes('/api/usuarios')) { return false; }
-        return (url.includes('/api'));
+        if (url.includes("/api/login") || url.includes("/api/usuarios")) {
+            return false;
+        }
+
+        return url.includes("/api");
     }
 }

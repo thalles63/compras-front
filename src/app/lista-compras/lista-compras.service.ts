@@ -1,16 +1,14 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient } from "@angular/common/http";
 
-import { environment } from '../../environments/environment';
-import { Injectable } from '@angular/core';
-import { ListaCompras } from './models/lista-compras';
+import { Injectable } from "@angular/core";
+import { environment } from "../../environments/environment";
+import { ListaCompras } from "./models/lista-compras";
 
 @Injectable()
 export class ListaComprasService {
-    constructor(
-        private http: HttpClient
-    ) { }
+    constructor(private http: HttpClient) {}
 
-    private API_URL = environment.API_URL + '/api/lista';
+    private API_URL = `${environment.API_URL}/api/lista`;
 
     list() {
         return this.http.get<ListaCompras[]>(`${this.API_URL}`);

@@ -1,30 +1,17 @@
-import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import { NgModule } from '@angular/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CommonModule } from "@angular/common";
+import { NgModule } from "@angular/core";
+import { RouterModule } from "@angular/router";
 
-import { PageContainerModule } from '../components/page-container/page-container.module';
+import { PageContainerModule } from "../components/page-container/page-container.module";
 
-import { TemplateComponent } from './template.component';
-import { NavBottomComponent } from './nav-bottom/nav-bottom.component';
-import { MenusService } from './menus/menus.service';
+import { MenusService } from "./menus/menus.service";
+import { NavBottomComponent } from "./nav-bottom/nav-bottom.component";
+import { TemplateComponent } from "./template.component";
 
 @NgModule({
-	declarations: [
-		NavBottomComponent,
-		TemplateComponent
-	],
-	imports: [
-		CommonModule,
-        RouterModule,
-		BrowserAnimationsModule,
-        PageContainerModule
-	],
-	exports: [TemplateComponent],
-	providers: [
-		MenusService
-	],
-	bootstrap: []
+    declarations: [NavBottomComponent, TemplateComponent],
+    imports: [CommonModule, RouterModule, PageContainerModule],
+    exports: [TemplateComponent],
+    providers: [MenusService]
 })
-export class TemplateModule {
-}
+export class TemplateModule {}

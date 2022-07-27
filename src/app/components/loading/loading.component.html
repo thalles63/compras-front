@@ -1,4 +1,5 @@
-<div class="loading">
+<div class="loading"
+     [class.is-loading]="(blockCount$ | async) || 0 > 0">
     <div class="loadingio-spinner-rolling-yhk9jy6zu6a">
         <div class="ldio-yhk9jy6zu6a">
             <div></div>

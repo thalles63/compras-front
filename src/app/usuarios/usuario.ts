@@ -5,4 +5,5 @@ export interface Usuario {
     username: string;
     primeiroNome?: string;
     token?: string;
- }
+    id: number;
+}

@@ -24,18 +24,7 @@
             </div>
             <div class="lista__item--container"
                  [class.last]="!!last"
-                 (click)="toggleItem(item)"
-                 [ngDraggable]="true"
-                 [class.transition]="transition"
-                 [position]="item?.screenProps?.posicao"
-                 [preventDefaultEvent]="false"
-                 (stopped)="onStop(item, lista, index)"
-                 [lockAxis]="'y'"
-                 (movingOffset)="onMoving($event, item)"
-                 [trackPosition]="true"
-                 [bounds]="myBounds"
-                 [inBounds]="inBounds"
-                 [outOfBounds]="myOutOfBounds">
+                 (click)="toggleItem(item)">
                 <div class="lista__item--checkbox">
                     <input type="checkbox"
                            [(ngModel)]="item.checado">
