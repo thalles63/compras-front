@@ -1,0 +1,16 @@
+<div class="nav">
+    <div class="nav__inner">
+        <div class="nav__links">
+            <div class="nav__link"
+                 [ngClass]="{'nav__link--active' : getLinkTela(item.link) }"
+                 *ngFor="let item of listaMenus"
+                 (click)="goTo(item)">
+                <i class="nav__icon las {{item.icone}}"
+                   aria-hidden="true"></i>
+                <span class="nav__text">{{item.titulo}}</span>
+            </div>
+        </div>
+        <div class="nav__inner--config">
+        </div>
+    </div>
+</div>

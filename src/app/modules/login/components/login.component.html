@@ -1,9 +1,11 @@
 <div class="login-body">
-    <user *ngIf="!selectedUser.nome"
-          [(selectedUser)]="selectedUser">
-    </user>
-
-    <password *ngIf="!!selectedUser.nome"
+    <panel>
+        <user *ngIf="!selectedUser.nome"
               [(selectedUser)]="selectedUser">
-    </password>
+        </user>
+
+        <password *ngIf="!!selectedUser.nome"
+                  [(selectedUser)]="selectedUser">
+        </password>
+    </panel>
 </div>

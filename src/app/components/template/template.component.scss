@@ -1,3 +1,15 @@
 .mb-55 {
     margin-bottom: 55px;
 }
+
+.main-template {
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .main-template {
+        max-width: 1079px;
+        margin: auto;
+        padding-top: 25px;
+    }
+}

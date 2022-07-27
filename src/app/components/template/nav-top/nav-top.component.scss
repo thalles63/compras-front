@@ -1,0 +1,51 @@
+@media (max-width: 767px) {
+    :host {
+        display: none;
+    }
+}
+.nav {
+    width: 100%;
+    height: 55px;
+    background-color: #1e3b70;
+
+    &__inner {
+        max-width: 1078px;
+        margin: auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &__links {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 55px;
+        color: #FFF;
+        font-size: 14px;
+        font-weight: 500;
+        letter-spacing: 0.3px;
+    }
+
+    &__link {
+        height: 55px;
+        display: flex;
+        align-items: center;
+        padding: 0 20px;
+        opacity: 0.8;
+        cursor: pointer;
+    }
+
+    &__link:hover {
+        opacity: 1;
+    }
+
+    &__link--active {
+        box-shadow: inset 0 -2px 0 #fff;
+        opacity: 1;
+    }
+
+    &__link i {
+        padding-right: 5px;
+    }
+}

@@ -1,8 +1,46 @@
-<dashboard-header></dashboard-header>
-<dashboard-action-panel></dashboard-action-panel>
-
-<div class="ultimas-compras">
-    <div class="ultimas-compras__title">Últimas Compras</div>
-
-    <compras-list [list]="compras" [simplified]="true"></compras-list>
+<div class="panel-mobile">
+    <dashboard-mobile-header></dashboard-mobile-header>
+    <panel>
+        <div class="saldo">
+            <div class="saldo-texto">Meu saldo:</div>
+            <div class="saldo-valor">
+                <div>R$ 150,00</div>
+                <i class="las la-smile"
+                   aria-hidden="true"></i>
+            </div>
+        </div>
+    </panel>
 </div>
+
+<panel class="panel-desktop">
+    <div class="d-flex align-center">
+        <div>
+            <div class="usuario-container--foto">
+                <img [src]="'/assets/img/usuarios/' + usuario.foto"
+                     alt="Foto do usuário">
+            </div>
+        </div>
+        <div>
+            <div class="usuario-container--nome">Olá, {{usuario.nome}}</div>
+            <div class="usuario-container--data">Hoje é {{diaExtenso}}, {{dia}} de {{mes}}</div>
+        </div>
+    </div>
+    <div class="d-flex align-center">
+        <div class="saldo-texto">Meu saldo:</div>
+        <div class="saldo-valor">
+            <div>R$ 150,00</div>
+            <i class="las la-smile"
+               aria-hidden="true"></i>
+        </div>
+    </div>
+</panel>
+
+<panel>
+    <div class="ultimas-compras">
+        <div class="ultimas-compras__title">Últimas Compras</div>
+
+        <compras-list [list]="compras"
+                      [simplified]="true">
+        </compras-list>
+    </div>
+</panel>

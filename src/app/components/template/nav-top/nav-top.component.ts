@@ -1,13 +1,13 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import { MenusService } from "src/app/components/template/menus/menus.service";
+import { MenusService } from "../menus/menus.service";
 
 @Component({
-    selector: "nav-mobile",
-    templateUrl: "./nav-bottom.component.html",
-    styleUrls: ["./nav-bottom.component.scss"]
+    selector: "nav-top",
+    templateUrl: "./nav-top.component.html",
+    styleUrls: ["./nav-top.component.scss"]
 })
-export class NavBottomComponent implements OnInit {
+export class NavTopComponent implements OnInit {
     constructor(public menusService: MenusService, private router: Router) {}
 
     listaMenus: any = [];

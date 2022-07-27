@@ -1,10 +1,75 @@
 .ultimas-compras {
-    padding: 0 30px;
-    margin-bottom: 75px;
-
     &__title {
         font-weight: bold;
         font-size: 19px;
         margin-bottom: 20px;
+    }
+}
+
+.panel-mobile {
+    display: none;
+}
+
+
+:host ::ng-deep {
+    .panel-mobile .panel {
+        margin-top: -40px;
+        height: 25px;
+    }
+    .panel-desktop {
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+@media (max-width: 767px) {
+    .panel-mobile {
+        display: block;
+    }
+    .panel-desktop {
+        display: none;
+    }
+}
+.saldo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.saldo-texto {
+    padding-right: 5px;
+}
+.saldo-valor {
+    display: flex;
+    align-items: center;
+    font-weight: 700;
+    color: #50cd89;
+
+    i {
+        font-size: 19px;
+        margin-left: 5px;
+    }
+}
+.usuario-container {
+    padding: 0 30px;
+    padding-top: 25px;
+    margin: auto;
+    margin-bottom: 20px;
+    display: flex;
+
+    &--nome {
+        font-size: 21px;
+        font-weight: 500;
+    }
+    &--data {
+        font-size: 13px;
+        color: #999999;
+    }
+    &--foto {
+        display: flex;
+        img {
+            max-width: 50px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
     }
 }
